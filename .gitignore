@@ -1,0 +1,10 @@
+# Python
+verificainainte/.venv/
+verificainainte/__pycache__/
+verificainainte/.env
+
+# Node
+frontend/node_modules/
+
+# VS Code
+.vscode/

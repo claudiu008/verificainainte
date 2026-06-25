@@ -55,7 +55,12 @@ function App() {
       {/* Header */}
       <div className="header">
         <div className="logo">🛡️</div>
-        <h1>VerificăÎnainte</h1>
+        <h1
+          onClick={() => { setText(""); setRezultat(null); setEroare(null); }}
+          style={{ cursor: "pointer" }}
+        >
+          🛡️ VerificăÎnainte
+        </h1>
         <p>Te-a sunat cineva de la bancă, ANAF, Poliție sau o platformă de investiții?</p>
         <p className="stop-text">STOP. Nu face transferul încă.</p>
       </div>

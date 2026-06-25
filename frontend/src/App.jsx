@@ -54,7 +54,6 @@ function App() {
 
       {/* Header */}
       <div className="header">
-        <div className="logo">🛡️</div>
         <h1
           onClick={() => { setText(""); setRezultat(null); setEroare(null); }}
           style={{ cursor: "pointer" }}

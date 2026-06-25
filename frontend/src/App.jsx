@@ -30,7 +30,7 @@ function App() {
     setEroare(null)
 
     try {
-      const response = await fetch("http://localhost:8000/analyze", {
+      const response = await fetch("https://verificainainte-production.up.railway.app/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text })
@@ -39,7 +39,7 @@ function App() {
       const data = await response.json()
       setRezultat(data.rezultat)
 
-    } catch (err) {
+    } catch (_err) {
       setEroare("Eroare de conexiune. Verifică că serverul rulează.")
     } finally {
       setLoading(false)

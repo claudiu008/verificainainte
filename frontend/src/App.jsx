@@ -60,7 +60,7 @@ function App() {
         >
           🛡️ VerificăÎnainte
         </h1>
-        <p>Ai fost sunat, ai primit un SMS, email sau mesaj pe WhatsApp de la bancă, ANAF, Poliție sau o platformă de investiții?</p>
+        <p>Ai fost sunat, ai primit un SMS, email sau mesaj pe WhatsApp de la Bancă, ANAF, Poliție sau o platformă de investiții?</p>
         <p className="stop-text">STOP. Nu face transferul încă.</p>
       </div>
 
@@ -71,7 +71,7 @@ function App() {
         </label>
         <textarea
           className="textarea"
-          placeholder="Ex: Am primit un SMS de la bancă cu un link, m-a sunat cineva de la ANAF, am primit un email cu o factură suspectă..."
+          placeholder="Ex: Am primit un SMS de la Bancă cu un link, m-a sunat cineva de la ANAF, am primit un email cu solicitare de actualizare date bancare..."
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={5}

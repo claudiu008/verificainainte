@@ -99,23 +99,25 @@ function App() {
       )}
 
       {/* Rezultat */}
-      {rezultat && stilScor && (
+      {rezultat && (
         <div className="rezultat">
 
-          {/* Banner scor */}
-          <div
-            className="scor-banner"
-            style={{
-              backgroundColor: stilScor.fundal,
-              borderColor: stilScor.culoare,
-              color: stilScor.culoare
-            }}
-          >
-            <span className="scor-emoji">{stilScor.emoji}</span>
-            <span className="scor-text">RISC {scor}</span>
-          </div>
+          {/* Banner scor — doar dacă există */}
+          {stilScor && (
+            <div
+              className="scor-banner"
+              style={{
+                backgroundColor: stilScor.fundal,
+                borderColor: stilScor.culoare,
+                color: stilScor.culoare
+              }}
+            >
+              <span className="scor-emoji">{stilScor.emoji}</span>
+              <span className="scor-text">RISC {scor}</span>
+            </div>
+          )}
 
-          {/* Conținut markdown */}
+          {/* Conținut markdown — apare întotdeauna */}
           <div className="continut">
             <ReactMarkdown>{rezultat}</ReactMarkdown>
           </div>

@@ -122,11 +122,6 @@ function App() {
             <ReactMarkdown>{rezultat}</ReactMarkdown>
           </div>
 
-          {/* Footer */}
-          <div className="footer-rezultat">
-            <p>Ai îndoieli? Sună direct instituția folosind numărul de pe site-ul oficial.</p>
-          </div>
-
         </div>
       )}
 

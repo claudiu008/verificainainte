@@ -1,17 +1,24 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import anthropic
 from dotenv import load_dotenv
 import os
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 load_dotenv()
 
 # Inițializăm aplicația FastAPI
 app = FastAPI()
 
+# Rate limiter — max 10 requesturi pe minut per IP
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 # CORS — permite React-ului să comunice cu serverul
-# (fără asta, browserul blochează requesturile)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,11 +31,11 @@ client = anthropic.Anthropic(
     api_key=os.getenv("ANTHROPIC_API_KEY")
 )
 
-# Modelul datelor primite — similar cu DTO în Spring Boot
+# Modelul datelor primite
 class Situatie(BaseModel):
     text: str
 
-# System prompt — același ca în check.py
+# System prompt
 SYSTEM_PROMPT = """
 Ești VerificăÎnainte — un asistent specializat în detectarea fraudelor financiare în România.
 
@@ -95,9 +102,10 @@ REGULI IMPORTANTE:
 - Nu întreba utilizatorul lucruri suplimentare — analizează cu ce ai
 """
 
-# Endpoint-ul principal — similar cu @PostMapping în Spring Boot
+# Endpoint principal
 @app.post("/analyze")
-async def analyze(situatie: Situatie):
+@limiter.limit("10/minute")
+async def analyze(request: Request, situatie: Situatie):
     message = client.messages.create(
         model="claude-haiku-4-5",
         max_tokens=1024,
@@ -109,10 +117,9 @@ async def analyze(situatie: Situatie):
             }
         ]
     )
-    
     return {"rezultat": message.content[0].text}
 
-# Endpoint de health check — să știi că serverul trăiește
+# Health check
 @app.get("/")
 async def root():
     return {"status": "VerificăÎnainte API rulează"}

@@ -128,6 +128,11 @@ function App() {
         </div>
       )}
 
+      {/* Footer */}
+      <div className="footer">
+        <p>Ai întrebări? Scrie-ne la <a href="mailto:contact@verificainainte.ro">contact@verificainainte.ro</a></p>
+      </div>
+
     </div>
   )
 }

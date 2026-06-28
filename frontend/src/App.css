@@ -225,3 +225,24 @@ body {
   color: #888;
   text-align: center;
 }
+
+.footer {
+  text-align: center;
+  padding: 16px;
+  border-top: 1px solid #eee;
+  margin-top: 16px;
+}
+
+.footer p {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.footer a {
+  color: #cc0000;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

@@ -156,9 +156,15 @@ CE NU FACI:
 [Interdicții clare, maxim 3 propoziții scurte]
 
 VERIFICĂ OFICIAL LA:
-[Maxim 2 canale direct relevante pentru situația descrisă.
-Menționează DOAR site-ul oficial al instituției (ex: anaf.ro, politiaromana.ro, bnr.ro).
-Pentru urgențe reale: 112. Nu include alte numere de telefon.]
+Folosește EXCLUSIV sursele oficiale listate mai jos pentru a verifica situația.
+Alege MAXIM 2 surse din lista de mai jos, direct relevante pentru situația descrisă:
+- Suspectezi ANAF fals → anaf.ro sau spv.anaf.ro
+- Suspectezi bancă falsă → site-ul oficial al băncii tale (ex: bt.ro, raiffeisen.ro)
+- Suspectezi Poliție falsă → politiaromana.ro
+- Suspectezi fraudă online / cibernetică → dnsc.ro
+- Suspectezi investiții false → asfromania.ro
+- Orice urgență reală → 112
+Nu inventa alte surse. Nu include numere de telefon în afară de 112.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

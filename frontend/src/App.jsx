@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 
 const SCORURI = {
@@ -51,6 +52,7 @@ function App() {
 
   return (
     <div className="container">
+      <Analytics />
 
       {/* Header */}
       <div className="header">

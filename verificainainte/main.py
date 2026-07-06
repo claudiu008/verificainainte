@@ -7,6 +7,8 @@ import os
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+import sqlite3
+from pathlib import Path
 
 load_dotenv()
 
@@ -30,6 +32,18 @@ app.add_middleware(
 client = anthropic.Anthropic(
     api_key=os.getenv("ANTHROPIC_API_KEY")
 )
+
+# Contor verificări — SQLite pe Volume Railway (persistă la fiecare redeploy)
+# Fallback la fișier local dacă /data nu există (ex: testare locală pe Windows)
+DB_PATH = Path("/data/stats.db") if Path("/data").exists() else Path("stats.db")
+
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("CREATE TABLE IF NOT EXISTS verificari (id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT DEFAULT CURRENT_TIMESTAMP)")
+    conn.commit()
+    conn.close()
+
+init_db()
 
 # Modelul datelor primite
 class Situatie(BaseModel):
@@ -240,9 +254,26 @@ async def analyze(request: Request, situatie: Situatie):
             }
         ]
     )
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.execute("INSERT INTO verificari DEFAULT VALUES")
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass  # o eroare de contorizare nu trebuie să strice răspunsul real
+
     return {"rezultat": message.content[0].text}
 
 # Health check
 @app.get("/")
 async def root():
     return {"status": "VerificăÎnainte API rulează"}
+
+@app.get("/stats")
+async def stats():
+    conn = sqlite3.connect(DB_PATH)
+    total = conn.execute("SELECT COUNT(*) FROM verificari").fetchone()[0]
+    azi = conn.execute("SELECT COUNT(*) FROM verificari WHERE date(timestamp) = date('now')").fetchone()[0]
+    conn.close()
+    return {"total": total, "azi": azi}

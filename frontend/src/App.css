@@ -247,3 +247,11 @@ body {
 .footer a:hover {
   text-decoration: underline;
 }
+
+.disclaimer {
+  font-size: 13px;
+  color: #8A9490;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #E5E5E5;
+}

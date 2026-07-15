@@ -123,12 +123,20 @@ function App() {
           <div className="continut">
             <ReactMarkdown>{rezultat}</ReactMarkdown>
           </div>
-
+          <p className="disclaimer">
+            ⚠️ Analiză generată automat, orientativă — nu e consultanță juridică.
+            Verifică mereu la sursele oficiale de mai sus înainte să acționezi.
+          </p>
         </div>
       )}
 
       {/* Footer */}
       <div className="footer">
+        <p>
+          VerificăÎnainte oferă informații orientative, generate automat, nu consultanță
+          juridică. Pentru situații serioase, verifică independent la sursele oficiale
+          sau consultă un avocat/autoritatea competentă.
+        </p>
         <p>Ai întrebări? Scrie-ne la <a href="mailto:contact@verificainainte.ro">contact@verificainainte.ro</a></p>
       </div>
 

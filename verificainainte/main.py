@@ -96,14 +96,17 @@ INSTITUȚII BANCARE — OUG 99/2006:
 - Art. 113 alin. (4): Personalul băncii nu poate folosi informații confidențiale pentru nimeni — solicitarea de PIN/OTP/parolă prin telefon încalcă direct acest articol
 CONCLUZIE: O bancă reală nu are niciodată nevoie să ceară date de autentificare — le are deja.
 
-POLIȚIA ROMÂNĂ — CPP + Legea 218/2002 + Legea 360/2002:
+POLIȚIA ROMÂNĂ — CPP + Legea 218/2002 + Legea 360/2002 + OG 2/2001:
 - Art. 257 CPP: Chemarea se face prin citație scrisă; citarea telefonică e permisă DAR necesită proces-verbal obligatoriu
 - Art. 258 CPP: Citația trebuie să conțină numărul dosarului, organul emitent, ora, ziua, locul, dreptul la avocat
 - Art. 265 CPP: Mandatul de aducere se emite DOAR dacă persoana a fost anterior citată în scris și nu s-a prezentat
 - Art. 31 lit. c) Legea 218/2002: Invitarea la sediu se face în scris, cu scopul și motivul explicate
 - Art. 43 lit. e) Legea 360/2002: Polițistului îi este INTERZIS în orice împrejurare să colecteze sume de bani
 - Art. 244 Cod Penal: Înșelăciunea prin calități mincinoase ("sunt polițist") se pedepsește cu 1-5 ani închisoare
-CONCLUZIE: Scenariul „vă sunăm de la Poliție, plătiți urgent" este imposibil legal și constituie infracțiune.
+- Art. 27 alin. (1) OG 2/2001: Amenzile de circulație (contravenții, inclusiv cele din radar/cameră) se comunică EXCLUSIV prin poștă cu aviz de primire, sau prin afișare la domiciliu cu martor — niciodată prin SMS sau link
+- Art. 16 OG 2/2001: Procesul-verbal conține obligatoriu temeiul legal și posibilitatea reducerii de 50% dacă plătești în 15 zile de la ÎNMÂNARE/COMUNICARE oficială — nu de la un SMS
+- Notă: amenzile de circulație sunt emise de Poliția Rutieră (parte din Poliția Română) — un minister (ex: „Ministerul Transporturilor") nu emite amenzi individuale către cetățeni
+CONCLUZIE: Scenariul „vă sunăm de la Poliție, plătiți urgent" este imposibil legal și constituie infracțiune. La fel, orice amendă „primită" prin SMS/link e imposibilă legal — comunicarea reală vine exclusiv prin poștă sau afișare la domiciliu.
 
 ASF (Autoritatea de Supraveghere Financiară) — OUG 93/2012:
 - Art. 2 alin. (1): Atribuții de autorizare, reglementare, supraveghere și control EXCLUSIV pe 3 sectoare — piața de capital, asigurări-reasigurări, pensii private. NU bănci, NU conturi curente, NU carduri.
@@ -124,6 +127,7 @@ TIPARE DE FRAUDĂ ACTIVE ÎN ROMÂNIA
 ═══════════════════════════════════════
 
 - Spoofing + investiții cripto false, cu revictimizare: apel cu număr falsificat, ofertă de investiție în cripto, apoi o a doua persoană falsă (autoritate străină sau „Poliția Cibernetică") cere „taxe" pentru deblocarea câștigurilor. Victimele sunt ulterior recontactate cu promisiunea „recuperării" banilor — o nouă fraudă.
+- Amendă falsă de circulație prin SMS: mesaj în numele unui minister sau „poliției rutiere", cu presiune de timp și amenințare (blocare ITP, transfer la parchet), link către o copie a unui site oficial (ex: Ghișeul.ro) care cere numărul cardului, expirarea și codul CVV. Atacatorii înregistrează mereu variante noi ale aceluiași domeniu fals (o literă schimbată, alt domeniu de nivel superior) — nu există UN nume de reținut, verificarea se face literă cu literă, de fiecare dată.
 - Falși agenți ANAF (vizează firme): apel cu număr spoofat sau email/SMS care cere actualizarea urgentă a datelor bancare.
 - „Dispozitiv blocat" (Poliție/DNSC falși): notificare falsă cu amendă de plătit într-un termen foarte scurt. Autoritățile reale NU blochează dispozitive de la distanță și nu cer plăți sub presiune de timp.
 - Cont WhatsApp/Telegram compromis — cel mai răspândit tipar: mesaj de la un „prieten"/„rudă" (cont real, compromis) care cere urgent transfer bancar, refuzând să vorbească la telefon.

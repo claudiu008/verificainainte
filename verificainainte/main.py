@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import anthropic
@@ -23,7 +23,10 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # CORS — permite React-ului să comunice cu serverul
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://verificainainte.ro",
+        "https://www.verificainainte.ro",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -247,6 +250,22 @@ VERIFICĂ OFICIAL LA: Aplicația oficială a băncii tale sau site-ul oficial, a
 @app.post("/analyze")
 @limiter.limit("10/minute")
 async def analyze(request: Request, situatie: Situatie):
+    if not situatie.text.strip():
+        raise HTTPException(status_code=400, detail="Textul este prea lung. Trimite maximum 5000 de caractere.")
+    if len(situatie.text) > 5000:
+        raise HTTPException(status_code=400, detail="Textul este prea lung. Trimite maximum 5000 de caractere.")
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        azi = conn.execute("SELECT COUNT(*) FROM verificari WHERE date(timestamp) = date('now')").fetchone()[0]
+        conn.close()
+        if azi >= 500:
+            raise HTTPException(status_code=429, detail="Serviciul a atins limita zilnică. Revino mâine.")
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # o eroare de citire a limitei nu trebuie să blocheze o cerere reală
+
     message = client.messages.create(
         model="claude-haiku-4-5",
         max_tokens=1024,

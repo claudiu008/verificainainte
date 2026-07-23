@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics, track } from '@vercel/analytics/react'
 import './App.css'
+
+const API_URL = import.meta.env.VITE_API_URL || "https://verificainainte-production.up.railway.app"
 
 const SCORURI = {
   'SCĂZUT': { culoare: '#2e7d32', fundal: '#f1f8e9', emoji: '🟢' },
@@ -31,7 +33,7 @@ function App() {
     setEroare(null)
 
     try {
-      const response = await fetch("https://verificainainte-production.up.railway.app/analyze", {
+      const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text })
@@ -45,6 +47,7 @@ function App() {
       }
 
       setRezultat(data.rezultat)
+      track('verification_submitted')
 
     } catch {
       setEroare("Nu am putut contacta serverul. Verifică conexiunea la internet și încearcă din nou.")

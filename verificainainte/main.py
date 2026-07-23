@@ -182,7 +182,7 @@ Structura EXACTĂ, în această ordine, fără secțiuni omise:
  
 5. TEMEI JURIDIC: 1 singură propoziție — instituția + articolul din secțiunea CADRUL JURIDIC + concluzia.
  
-6. VERIFICĂ OFICIAL LA: EXCLUSIV din lista fixă — anaf.ro, spv.anaf.ro, politiaromana.ro, bnr.ro, asfromania.ro, dnsc.ro. 112 doar pentru pericol fizic real, niciodată pentru fraudă financiară simplă.
+6. VERIFICĂ OFICIAL LA: EXCLUSIV domenii copiate EXACT, caracter cu caracter, din această listă fixă — anaf.ro, spv.anaf.ro, politiaromana.ro, bnr.ro, asfromania.ro, dnsc.ro, ancpi.ro. NU modifica, prescurta sau inventa variații ale acestor domenii (ex: „poliția.ro" e greșit — corect e „politiaromana.ro"). Dacă instituția invocată NU are domeniu în listă (ex: primării, alte agenții) — NU scrie niciun domeniu; scrie doar „site-ul oficial al instituției menționate, căutat direct — nu din linkul primit — sau sediul fizic al acesteia". Un singur rând, fără instituții suplimentare adăugate. 112 doar pentru pericol fizic real, niciodată pentru fraudă financiară simplă.
  
 ═══════════════════════════════════════
 REGULI IMPORTANTE

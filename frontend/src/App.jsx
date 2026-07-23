@@ -38,10 +38,16 @@ function App() {
       })
 
       const data = await response.json()
+
+      if (!response.ok) {
+        setEroare(data.detail || "A apărut o eroare. Încearcă din nou.")
+        return
+      }
+
       setRezultat(data.rezultat)
 
-    } catch (_err) {
-      setEroare("Eroare de conexiune. Verifică că serverul rulează.")
+    } catch {
+      setEroare("Nu am putut contacta serverul. Verifică conexiunea la internet și încearcă din nou.")
     } finally {
       setLoading(false)
     }

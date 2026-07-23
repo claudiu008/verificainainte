@@ -19,11 +19,38 @@ function detecteazaScor(text) {
   return null
 }
 
+const EXEMPLU_SMS = "Ministerul Transporturilor: Aveti o amenda de circulatie neplatita de 145 RON. Pentru a evita majorarea cu 100% si transferul la executare silita, achitati in maxim 24h pe ghiseul-ro-plati.com. Introduceti numarul cardului si codul CVV pentru confirmare."
+
+const EXEMPLU_REZULTAT = `STOP
+
+SCOR: CRITIC
+
+TIPAR DETECTAT: Amendă falsă de circulație prin SMS (link-clonă „Ghișeul.ro", cerere date card)
+
+CE FACI ACUM: Fă o captură de ecran a SMS-ului acum. Nu accesa linkul din mesaj. Nu introduce nicio dată pe pagina la care ajungi din el.
+
+CE NU FACI: Nu accesa linkul. Nu introduce numărul cardului, data expirării sau codul CVV. Nu suna niciun număr din SMS. Nu șterge mesajul — e dovadă.
+
+TEMEI JURIDIC: Amenzile de circulație se comunică exclusiv prin poștă cu aviz de primire sau prin afișare la domiciliu, niciodată prin SMS sau link (Art. 27 alin. (1) OG 2/2001) — mesajul e imposibil legal.
+
+VERIFICĂ OFICIAL LA: politiaromana.ro`
+
 function App() {
   const [text, setText] = useState("")
   const [rezultat, setRezultat] = useState(null)
   const [loading, setLoading] = useState(false)
   const [eroare, setEroare] = useState(null)
+  const [exemplu, setExemplu] = useState(false)
+
+  const arataExemplu = () => {
+    setExemplu(true)
+    setRezultat(null)
+    setEroare(null)
+  }
+
+  const ascundeExemplu = () => {
+    setExemplu(false)
+  }
 
   const analizeaza = async () => {
     if (!text.trim()) return
@@ -31,6 +58,7 @@ function App() {
     setLoading(true)
     setRezultat(null)
     setEroare(null)
+    setExemplu(false)
 
     try {
       const response = await fetch(`${API_URL}/analyze`, {
@@ -56,7 +84,8 @@ function App() {
     }
   }
 
-  const scor = rezultat ? detecteazaScor(rezultat) : null
+  const continutAfisat = exemplu ? EXEMPLU_REZULTAT : rezultat
+  const scor = continutAfisat ? detecteazaScor(continutAfisat) : null
   const stilScor = scor ? SCORURI[scor] : null
 
   return (
@@ -66,10 +95,10 @@ function App() {
       {/* Header */}
       <div className="header">
         <h1
-          onClick={() => { setText(""); setRezultat(null); setEroare(null); }}
+          onClick={() => { setText(""); setRezultat(null); setEroare(null); setExemplu(false); }}
           style={{ cursor: "pointer" }}
         >
-          🛡️ VerificăÎnainte
+          <span className="shield-icon">🛡️</span> VerificăÎnainte
         </h1>
         <p>Ai fost sunat, ai primit un SMS, email sau mesaj pe WhatsApp de la Bancă, ANAF, Poliție sau o platformă de investiții?</p>
         <p className="stop-text">STOP. Nu face transferul încă.</p>
@@ -100,6 +129,13 @@ function App() {
             "Verifică situația →"
           )}
         </button>
+        <button
+          className="buton-secundar"
+          onClick={arataExemplu}
+          disabled={loading}
+        >
+          🔎 Vezi un exemplu
+        </button>
       </div>
 
       {/* Eroare */}
@@ -109,8 +145,16 @@ function App() {
         </div>
       )}
 
+      {/* Exemplu — mesaj de intrare afișat deasupra rezultatului, doar în modul exemplu */}
+      {exemplu && (
+        <div className="exemplu-sms">
+          <span className="exemplu-eticheta">EXEMPLU · SMS primit</span>
+          <p>{EXEMPLU_SMS}</p>
+        </div>
+      )}
+
       {/* Rezultat */}
-      {rezultat && (
+      {continutAfisat && (
         <div className="rezultat">
 
           {/* Banner scor — doar dacă există */}
@@ -130,12 +174,17 @@ function App() {
 
           {/* Conținut markdown — apare întotdeauna */}
           <div className="continut">
-            <ReactMarkdown>{rezultat}</ReactMarkdown>
+            <ReactMarkdown>{continutAfisat}</ReactMarkdown>
           </div>
           <p className="disclaimer">
             ⚠️ Analiză generată automat, orientativă — nu e consultanță juridică.
             Verifică mereu la sursele oficiale de mai sus înainte să acționezi.
           </p>
+          {exemplu && (
+            <button className="buton-inchide-exemplu" onClick={ascundeExemplu}>
+              ✕ Ascunde exemplul
+            </button>
+          )}
         </div>
       )}
 

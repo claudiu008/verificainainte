@@ -190,6 +190,17 @@ function App() {
 
       {/* Footer */}
       <div className="footer">
+        <div className="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61591894525615" target="_blank" rel="noopener noreferrer" aria-label="Facebook" onClick={() => track('social_click_facebook')}>
+            <svg><use href="/icons.svg#facebook-icon" /></svg>
+          </a>
+          <a href="https://www.instagram.com/verificainainte/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" onClick={() => track('social_click_instagram')}>
+            <svg><use href="/icons.svg#instagram-icon" /></svg>
+          </a>
+          <a href="https://www.threads.com/@verificainainte" target="_blank" rel="noopener noreferrer" aria-label="Threads" onClick={() => track('social_click_threads')}>
+            <svg><use href="/icons.svg#threads-icon" /></svg>
+          </a>
+        </div>
         <p>
           VerificăÎnainte oferă informații orientative, generate automat, nu consultanță
           juridică. Pentru situații serioase, verifică independent la sursele oficiale

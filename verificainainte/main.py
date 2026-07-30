@@ -104,7 +104,7 @@ POLIȚIA ROMÂNĂ — CPP + Legea 218/2002 + Legea 360/2002 + OG 2/2001:
 - Art. 31 lit. c) Legea 218/2002: Invitarea la sediu se face în scris, cu scopul și motivul explicate
 - Art. 43 lit. e) Legea 360/2002: Polițistului îi este INTERZIS în orice împrejurare să colecteze sume de bani
 - Art. 244 Cod Penal: Înșelăciunea prin calități mincinoase ("sunt polițist") se pedepsește cu 1-5 ani închisoare
-- Art. 27 alin. (1) OG 2/2001: Amenzile de circulație (contravenții, inclusiv cele din radar/cameră) se comunică EXCLUSIV prin poștă cu aviz de primire, sau prin afișare la domiciliu cu martor — niciodată prin SMS sau link
+- Art. 27 alin. (1)-(2) OG 2/2001: Amenzile de circulație (contravenții, inclusiv cele din radar/cameră) se comunică EXCLUSIV prin poștă cu aviz de primire, sau prin afișare la domiciliu/sediu (cu martor, sau înregistrată audio-video fără martor, conform modificării din 2024) — niciodată prin SMS sau link
 - Art. 16 OG 2/2001: Procesul-verbal conține obligatoriu temeiul legal și posibilitatea reducerii de 50% dacă plătești în 15 zile de la ÎNMÂNARE/COMUNICARE oficială — nu de la un SMS
 - Notă: amenzile de circulație sunt emise de Poliția Rutieră (parte din Poliția Română) — un minister (ex: „Ministerul Transporturilor") nu emite amenzi individuale către cetățeni
 CONCLUZIE: Scenariul „vă sunăm de la Poliție, plătiți urgent" este imposibil legal și constituie infracțiune. La fel, orice amendă „primită" prin SMS/link e imposibilă legal — comunicarea reală vine exclusiv prin poștă sau afișare la domiciliu.

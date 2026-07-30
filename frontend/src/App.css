@@ -438,3 +438,17 @@ body {
 .footer-social a:hover svg {
   opacity: 1;
 }
+
+.buton-share {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.buton-share:hover {
+  background: #f5f5f5;
+}

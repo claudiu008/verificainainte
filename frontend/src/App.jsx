@@ -41,6 +41,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [eroare, setEroare] = useState(null)
   const [exemplu, setExemplu] = useState(false)
+  const [copiat, setCopiat] = useState(false)
 
   const arataExemplu = () => {
     setExemplu(true)
@@ -87,6 +88,26 @@ function App() {
   const continutAfisat = exemplu ? EXEMPLU_REZULTAT : rezultat
   const scor = continutAfisat ? detecteazaScor(continutAfisat) : null
   const stilScor = scor ? SCORURI[scor] : null
+
+  const partajeaza = async () => {
+    const textCurat = continutAfisat.replace(/[*_#]/g, '').trim()
+    const prefixScor = scor ? `RISC ${scor}\n\n` : ''
+    const mesaj = `${prefixScor}${textCurat}\n\nVerificat pe VerificăÎnainte: https://verificainainte.ro`
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ text: mesaj })
+        track('share_native')
+      } catch {
+        // utilizatorul a anulat share-ul — nu e o eroare reală
+      }
+    } else {
+      await navigator.clipboard.writeText(mesaj)
+      track('share_clipboard')
+      setCopiat(true)
+      setTimeout(() => setCopiat(false), 2000)
+    }
+  }
 
   return (
     <div className="container">
@@ -180,6 +201,11 @@ function App() {
             ⚠️ Analiză generată automat, orientativă — nu e consultanță juridică.
             Verifică mereu la sursele oficiale de mai sus înainte să acționezi.
           </p>
+          {!exemplu && (
+            <button className="buton-share" onClick={partajeaza}>
+              {copiat ? '✓ Copiat în clipboard' : '↗ Trimite mai departe'}
+            </button>
+          )}
           {exemplu && (
             <button className="buton-inchide-exemplu" onClick={ascundeExemplu}>
               ✕ Ascunde exemplul

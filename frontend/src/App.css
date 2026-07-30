@@ -443,12 +443,14 @@ body {
   margin-top: 12px;
   padding: 10px 16px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  background: white;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
   cursor: pointer;
   font-size: 14px;
 }
 
 .buton-share:hover {
-  background: #f5f5f5;
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
 }

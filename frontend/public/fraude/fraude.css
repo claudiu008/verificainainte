@@ -347,6 +347,55 @@ section p {
   text-decoration: underline;
 }
 
+/* Index /fraude/ */
+.index-intro {
+  text-align: left;
+}
+
+.tipar-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.tipar-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 18px 20px;
+  color: var(--text-h);
+  text-decoration: none;
+  height: 100%;
+}
+
+.tipar-card:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.tipar-card strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.tipar-card span {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .tipar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 420px) {
   h1 {
     font-size: 1.6rem;

@@ -1,0 +1,374 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+
+  --danger: #cc0000;
+  --danger-bg: #fff0f0;
+  --danger-border: #ffcccc;
+  --cta: #0d7d72;
+  --cta-hover: #0a655d;
+  --cta-text: #ffffff;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light dark;
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+
+    --danger: #ff6b6b;
+    --danger-bg: rgba(255, 107, 107, 0.1);
+    --danger-border: rgba(255, 107, 107, 0.4);
+    --cta: #14b8a6;
+    --cta-hover: #0d9488;
+    --cta-text: #08060d;
+  }
+
+  .footer-social a svg {
+    filter: invert(1) brightness(2);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Header */
+.pagina-header {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+}
+
+.pagina-header a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.pagina-header a:hover {
+  opacity: 0.8;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 12px;
+}
+
+section p {
+  margin: 0 0 10px;
+  line-height: 1.6;
+}
+
+/* Exemplu de mesaj fals */
+.exemplu-mesaj {
+  position: relative;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--danger);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.exemplu-eticheta {
+  display: inline-block;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transform: rotate(-2deg);
+  margin-bottom: 12px;
+}
+
+.exemplu-mesaj blockquote {
+  margin: 0;
+  font-style: italic;
+  color: var(--text-h);
+  line-height: 1.6;
+  border: none;
+  padding: 0;
+}
+
+/* Liste generice (semne, pași) */
+.lista-semne,
+.lista-pasi,
+.lista-nu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lista-semne li,
+.lista-pasi li,
+.lista-nu li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  line-height: 1.55;
+}
+
+.lista-semne li::before,
+.lista-pasi li::before {
+  content: "✓";
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lista-nu li::before {
+  content: "✕";
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Temei juridic */
+.temei-juridic {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.temei-juridic p {
+  margin: 0;
+  color: var(--text-h);
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 20px;
+  margin-bottom: 10px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-h);
+  padding: 14px 0;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  float: right;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.faq-item[open] summary::after {
+  content: "–";
+}
+
+.faq-item p {
+  padding-bottom: 16px;
+  margin: 0;
+}
+
+/* CTA */
+.cta-banner {
+  background: var(--cta);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.cta-banner p {
+  margin: 0;
+  color: var(--cta-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.cta-banner a {
+  display: inline-block;
+  background: var(--cta-text);
+  color: var(--cta);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  transition: transform 0.15s;
+}
+
+.cta-banner a:hover {
+  transform: translateY(-1px);
+}
+
+/* Linkuri interne / fraude înrudite */
+.fraude-inrudite ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fraude-inrudite a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text-h);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.fraude-inrudite a:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+/* Footer — consistent cu SPA */
+.pagina-footer {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 16px 24px 48px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.footer-social a svg {
+  width: 22px;
+  height: 22px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.footer-social a:hover svg {
+  opacity: 1;
+}
+
+.pagina-footer p {
+  font-size: 0.85rem;
+  color: var(--text);
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+.pagina-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.pagina-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  main {
+    gap: 26px;
+    padding: 0 16px 40px;
+  }
+
+  .exemplu-mesaj,
+  .temei-juridic {
+    padding: 16px;
+  }
+
+  .cta-banner {
+    padding: 22px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -411,6 +411,10 @@ body {
   .scor-banner {
     padding: 16px 18px;
   }
+
+  .fraude-sectiune {
+    padding: 20px 18px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -444,6 +448,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
   animation: fade-in 0.4s ease-out;
 }
 

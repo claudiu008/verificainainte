@@ -35,6 +35,39 @@ TEMEI JURIDIC: Amenzile de circulație se comunică exclusiv prin poștă cu avi
 
 VERIFICĂ OFICIAL LA: politiaromana.ro`
 
+const FRAUDE_CARDS = [
+  {
+    slug: 'colet-blocat-curier',
+    titlu: 'Colet blocat la curier',
+    text: 'SMS despre un colet oprit, cu o taxă de câțiva lei. Suma mică e capcana.',
+  },
+  {
+    slug: 'apel-fals-banca-politie',
+    titlu: 'Apel fals de la bancă sau poliție',
+    text: 'Ți se cere să muți banii într-un cont sigur. Contul sigur nu există.',
+  },
+  {
+    slug: 'whatsapp-cont-spart',
+    titlu: 'Cont de WhatsApp spart',
+    text: 'Un prieten îți cere bani împrumut. Nu el scrie.',
+  },
+  {
+    slug: 'investitii-deepfake',
+    titlu: 'Investiții cu chip generat artificial',
+    text: 'O persoană publică recomandă o platformă. Videoclipul nu mai e o dovadă.',
+  },
+  {
+    slug: 'fals-suport-tehnic',
+    titlu: 'Fals suport tehnic',
+    text: 'Te sună cineva că ai virus și cere să instalezi o aplicație.',
+  },
+  {
+    slug: 'amenda-falsa-sms',
+    titlu: 'Amendă falsă prin SMS',
+    text: 'Link de plată și termen de 24h. Amenzile reale nu vin prin SMS.',
+  },
+]
+
 function App() {
   const [text, setText] = useState("")
   const [rezultat, setRezultat] = useState(null)
@@ -171,6 +204,36 @@ function App() {
         <div className="exemplu-sms">
           <span className="exemplu-eticheta">EXEMPLU · SMS primit</span>
           <p>{EXEMPLU_SMS}</p>
+        </div>
+      )}
+
+      {/* Fraude active — link-uri către paginile statice SEO, ascunse când e afișat un rezultat */}
+      {!continutAfisat && (
+        <div className="fraude-sectiune">
+          <h2>Fraude active acum în România</h2>
+          <p className="fraude-subtitlu">
+            Recunoaște tiparul înainte să te coste. Fiecare are o pagină cu exemple reale și pașii de urmat.
+          </p>
+          <div className="fraude-grid">
+            {FRAUDE_CARDS.map((card) => (
+              <a
+                key={card.slug}
+                className="fraude-card"
+                href={`/fraude/${card.slug}/?utm_source=spa&utm_medium=internal&utm_campaign=${card.slug}`}
+                onClick={() => track(`fraude_click_${card.slug}`)}
+              >
+                <strong>{card.titlu}</strong>
+                <span>{card.text}</span>
+              </a>
+            ))}
+          </div>
+          <a
+            className="fraude-index-link"
+            href="/fraude/?utm_source=spa&utm_medium=internal&utm_campaign=index"
+            onClick={() => track('fraude_click_index')}
+          >
+            Vezi toate cele 14 tipare →
+          </a>
         </div>
       )}
 

@@ -439,6 +439,82 @@ body {
   opacity: 1;
 }
 
+/* Fraude active */
+.fraude-sectiune {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fade-in 0.4s ease-out;
+}
+
+.fraude-sectiune h2 {
+  font-size: 1.5rem;
+}
+
+.fraude-subtitlu {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.fraude-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .fraude-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fraude-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  padding: 18px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.fraude-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.fraude-card strong {
+  color: var(--text-h);
+  font-family: var(--heading);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.fraude-card span {
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.fraude-index-link {
+  align-self: center;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.fraude-index-link:hover {
+  text-decoration: underline;
+}
+
 .buton-share {
   margin-top: 12px;
   padding: 10px 16px;

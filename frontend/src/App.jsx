@@ -62,9 +62,9 @@ const FRAUDE_CARDS = [
     text: 'Te sună cineva că ai virus și cere să instalezi o aplicație.',
   },
   {
-    slug: 'amenda-falsa-sms',
-    titlu: 'Amendă falsă prin SMS',
-    text: 'Link de plată și termen de 24h. Amenzile reale nu vin prin SMS.',
+    slug: 'produse-medicale-false',
+    titlu: 'Capsule „minune" din reclame',
+    text: 'Poveste emoțională, reducere 50%, plată la livrare. Plata la livrare e capcana.',
   },
 ]
 
@@ -232,7 +232,7 @@ function App() {
             href="/fraude/?utm_source=spa&utm_medium=internal&utm_campaign=index"
             onClick={() => track('fraude_click_index')}
           >
-            Vezi toate cele 14 tipare →
+            Vezi toate cele 15 tipare →
           </a>
         </div>
       )}

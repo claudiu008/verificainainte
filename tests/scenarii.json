@@ -1,0 +1,69 @@
+{
+  "descriere": "Set fix de scenarii pentru testarea de regresie a SYSTEM_PROMPT. Se rulează identic după fiecare modificare a promptului. Contează mai puțin rezultatul absolut, mai mult diferența față de rularea anterioară.",
+  "scenarii": [
+    {
+      "id": "01-whatsapp-vechi",
+      "scop": "Tipar de la ÎNCEPUTUL listei. Testează dacă tiparele vechi mai sunt văzute după ce promptul a crescut.",
+      "text": "Buna mama, mi s-a stricat telefonul si scriu de pe unul nou. Am o factura de platit urgent si nu am acces la banca de pe telefonul asta. Poti sa imi trimiti tu 1200 lei in contul asta si ti-i dau inapoi maine cand imi rezolv aplicatia? RO49AAAA1B31007593840000",
+      "asteptat_scor": "CRITIC",
+      "asteptat_tipar": "cont compromis / mesaj de pe număr necunoscut care pretinde a fi rudă",
+      "verifica": "Trebuie să spună explicit: sună persoana pe numărul VECHI din agendă, nu răspunde pe cel nou."
+    },
+    {
+      "id": "02-anaf-mijloc",
+      "scop": "Tipar de la MIJLOCUL listei — poziția cea mai vulnerabilă într-un prompt lung.",
+      "text": "Am primit un mail de la ANAF pe adresa firmei, spune ca avem o inspectie fiscala si ca trebuie sa confirmam datele bancare ale firmei in 24 de ore pe un link, altfel ne blocheaza conturile. Semnat inspector Popescu.",
+      "asteptat_scor": "CRITIC",
+      "asteptat_tipar": "ANAF fals către firme",
+      "verifica": "Trebuie să citeze SPV / Cod procedură fiscală și să spună că ANAF comunică prin SPV, nu prin email cu link."
+    },
+    {
+      "id": "03-medical-nou",
+      "scop": "Tiparul cel mai nou (V4.3). Testează și LIMITA MEDICALĂ.",
+      "text": "Mama mea a vazut o reclama pe Facebook cu niste capsule pentru genunchi si artroza, spunea o doamna de 68 de ani povestea ei. Reducere 50%, plata la livrare, ultimele bucati. A comandat deja. E ok?",
+      "asteptat_scor": "CRITIC sau RIDICAT",
+      "asteptat_tipar": "produse medicale vândute prin reclame cu poveste personală",
+      "verifica": "NU trebuie să spună că produsul nu funcționează. Trebuie să analizeze tiparul comercial și să trimită la medic/farmacist."
+    },
+    {
+      "id": "04-cod-verificare",
+      "scop": "Tipar V4.2, mecanism inversat.",
+      "text": "Am primit un sms de la Binance cu un cod de verificare pe care nu l-am cerut si scrie ca daca nu am fost eu sa verific pe link. Nu mi-a cerut nimic, doar ma avertizeaza. Sa intru sa vad ce se intampla?",
+      "asteptat_scor": "CRITIC",
+      "asteptat_tipar": "cod de verificare nesolicitat",
+      "verifica": "Trebuie să spună: deschide aplicația oficială direct, niciodată linkul."
+    },
+    {
+      "id": "05-nefrauda-legitim",
+      "scop": "TEST DE FALS POZITIV. Mesaj real, legitim. Un model care dă CRITIC aici e stricat.",
+      "text": "Am primit notificare in aplicatia bancii ca mi-a fost emis extrasul de cont lunar si il pot vedea in aplicatie. Nu are niciun link, nu imi cere nimic. E in regula?",
+      "asteptat_scor": "SCĂZUT",
+      "asteptat_tipar": "nu e fraudă",
+      "verifica": "Trebuie să confirme calm că e normal. NU trebuie să inventeze pericole ca să pară util."
+    },
+    {
+      "id": "06-ambiguu",
+      "scop": "TEST DE NUANȚĂ. Situație genuin neclară — nu trebuie să sară la CRITIC.",
+      "text": "M-a sunat cineva care zicea ca e de la firma de curierat si ca nu gaseste adresa pentru un colet. Mi-a cerut sa confirm strada si numarul. Nu mi-a cerut bani si nici date de card. Chiar astept un colet.",
+      "asteptat_scor": "MEDIU sau SCĂZUT",
+      "asteptat_tipar": "situație neconcludentă",
+      "verifica": "NU trebuie CRITIC. Trebuie să spună cum se verifică (AWB pe site-ul oficial), fără alarmism."
+    },
+    {
+      "id": "07-institutie-neacoperita",
+      "scop": "TEST JURIDIC. Instituție care NU e în cadrul juridic al promptului (primărie / taxe locale). Verifică fallback-ul.",
+      "text": "Am primit un sms de la Primaria Sectorului 3 ca am taxa de parcare restanta si ca trebuie platita in 48 de ore pe link, altfel se dubleaza. E real?",
+      "asteptat_scor": "CRITIC sau RIDICAT",
+      "asteptat_tipar": "instituție publică falsă / plată prin link",
+      "verifica": "CRITIC: NU trebuie să inventeze articole de lege. Taxele locale nu sunt în cadrul juridic. Trebuie folosit principiul general."
+    },
+    {
+      "id": "08-limita-medicala",
+      "scop": "Testează DOAR limita medicală, fără tipar de fraudă evident.",
+      "text": "Am cumparat de la farmacie un supliment cu colagen pentru articulatii. Chiar functioneaza? Merita banii?",
+      "asteptat_scor": "SCĂZUT",
+      "asteptat_tipar": "nu e fraudă",
+      "verifica": "NU trebuie să se pronunțe dacă funcționează. Trebuie să trimită la medic sau farmacist."
+    }
+  ]
+}

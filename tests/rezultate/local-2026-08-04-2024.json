@@ -1,0 +1,102 @@
+[
+  {
+    "id": "01-whatsapp-vechi",
+    "rulare": 1,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC",
+    "tipar": "Cont WhatsApp/Telegram compromis — mesaj de pe numărul REAL ",
+    "articole": [],
+    "cuvinte": 234,
+    "tokeni_in": 10582,
+    "tokeni_out": 499,
+    "raspuns": "STOP\nSCOR: CRITIC\nTIPAR DETECTAT: Cont WhatsApp/Telegram compromis — mesaj de pe numărul REAL al unei persoane apropiate, cu cerere de transfer mic-mediu și IBAN specific\n\nCE FACI ACUM: \n1. **NU transfera niciun ban.** Închide conversația acum.\n2. **Suna IMEDIAT pe numărul vechi** al acestei persoane (din agendă, de pe contactul original) — pe alt dispozitiv dacă poți — și întreab-o dacă chiar a pierdut telefonul și dacă a cerut bani. NU numi suma sau IBAN-ul — lăsa-o să-ți spună prima dacă știe ceva.\n3. Fă o captură de ecran a **întregii conversații**, inclusiv a IBAN-ului, **ÎNAINTE de orice altceva**.\n\nCE NU FACI: \n- Nu transfera niciun ban în acel IBAN.\n- Nu răspunde pe acest canal cu confirmări sau alte detalii.\n- Nu șterge conversația — e dovadă.\n- Chiar dacă răspunsul de pe numărul vechi confirmă că e persoana reală și că a pierdut telefonul, NU transfera până nu suni din nou și nu iei instrucțiuni direct pe acest canal verificat (sau, și mai sigur, până nu vorbești față în față).\n\nTEMEI JURIDIC: Contacturile bancare directe din WhatsApp/Telegram nu sunt legitime — când un prieten reale are o urgență, apelul vocal e instinctul. Mesajul banal și promisiunea returnării rapide a \"1200 lei mâine\" sunt exact semnele că contul i-a fost spart și se fac transferuri în numele persoanei, fără știrea ei.\n\nVERIFICĂ OFICIAL LA: Apel vocal direct pe numărul cunoscut din agendă."
+  },
+  {
+    "id": "02-anaf-mijloc",
+    "rulare": 1,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC",
+    "tipar": "Vishing instituțional + phishing — fals email ANAF cu presiu",
+    "articole": [
+      "art. 46–47"
+    ],
+    "cuvinte": 224,
+    "tokeni_in": 10551,
+    "tokeni_out": 483,
+    "raspuns": "STOP\nSCOR: CRITIC\n\nTIPAR DETECTAT: Vishing instituțional + phishing — fals email ANAF cu presiune de timp și cerere date bancare printr-un link\n\nCE FACI ACUM:\n1. Nu accesa linkul din email. Fă o captură de ecran a emailului complet (expeditor, subiect, corp, link) ACUM, înainte de orice altă acțiune.\n2. Nu răspunde la email și nu suna numărul din semnătură (dacă există).\n3. Contactează ANAF direct pe canalul oficial: mergi pe **anaf.ro**, caută secțiunea „Contact\" sau „Inspecții\", și apelează sau scrie doar de acolo pentru a verifica dacă inspecția e reală. Dacă inspecția există, ANAF îți va confirma prin același canal oficial, fără urgență.\n\nCE NU FACI:\n- Nu accesa linkul sub nicio formă — va fura credențialele.\n- Nu confirma date bancare — ANAF le are deja din înregistrările tale.\n- Nu șterge emailul — e dovadă esențială.\n- Nu transfera bani pentru „taxe\" sau „deblocări\".\n- Nu instala nicio aplicație dacă linkul te redirecționează către o „descărcare de securitate\".\n\nTEMEI JURIDIC: ANAF comunică orice act fiscal EXCLUSIV în scris, prin poștă recomandată cu confirmare sau SPV, și niciodată nu cere confirmarea datelor bancare prin email sau link (Legea 207/2015, art. 46–47). Contactul prin email cu presiune de timp e imposibil legal — e fraudă prin definiție.\n\nVERIFICĂ OFICIAL LA: **anaf.ro** sau **spv.anaf.ro** — apelează direct de acolo, nu din linkul emailului."
+  },
+  {
+    "id": "03-medical-nou",
+    "rulare": 1,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC sau RIDICAT",
+    "tipar": "Produs „medicinal\" vândut prin reclamă pe rețele sociale cu ",
+    "articole": [],
+    "cuvinte": 244,
+    "tokeni_in": 10554,
+    "tokeni_out": 533,
+    "raspuns": "SCOR: CRITIC\n\nTIPAR DETECTAT: Produs „medicinal\" vândut prin reclamă pe rețele sociale cu plată la livrare — tipar clasic de fraudă comercială\n\nCE FACI ACUM: \n1. Dacă curierul NU a venit încă — refuză livrarea sau anulează comanda acum, înainte de orice.\n2. Fă o captură de ecran a reclamei (dacă mama ți-o poate arăta) și a oricărui email/SMS de confirmare.\n3. Contactează Facebook/Instagram și raportează reclama ca publicitate înșelătoare.\n\nCE NU FACI: Nu plăti curierului când vine. Nu introduce capsulele în tratament, indiferent dacă au venit deja — spune-i mamei să întreb medicul de familie înainte de a lua orice și din orice sursă necunoscută. Nu șterge nicio dovadă din corespondență.\n\nTEMEI JURIDIC: Orice produs prezentat ca tratament pentru o boală și vândut prin reclamă pe rețele sociale, cu plată la livrare și fără autorizație medicală, încalcă legislația privind publicitatea medicală și protecția consumatorului. Sumele mici se plătesc cu gândul că sunt nesemnificative — exact asta e capcana.\n\nVERIFICĂ OFICIAL LA: Dacă domeniu (vânzare: .ro, .top, .xyz etc.) — caută brandu *pe Google direct*, nu din linkul reclamei. Dacă există, verifică pe site oficial dacă acest produs există și dacă are certificate de autorizare. Pentru orice întrebare despre tratament: medicul de familie sau farmacistul.\n\n---\n\n**Dacă a plătit deja sau curierul a venit:** nu ține capsulele. Nu le dă mamei. Solicită retur și refund curierului. Dacă refund nu vine, deschide dispută cu banca dacă a fost card, sau raportează la Poliție cu dovezile."
+  },
+  {
+    "id": "04-cod-verificare",
+    "rulare": 1,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC",
+    "tipar": "Cod de verificare nesolicitat (invers phishing) — SMS care i",
+    "articole": [],
+    "cuvinte": 191,
+    "tokeni_in": 10551,
+    "tokeni_out": 406,
+    "raspuns": "STOP\nSCOR: CRITIC\nTIPAR DETECTAT: Cod de verificare nesolicitat (invers phishing) — SMS care imită alertă de securitate pentru a te duce pe pagină falsă\n\nCE FACI ACUM: Nu accesa linkul din SMS. Fă o captură de ecran a mesajului ACUM, înainte de orice altă acțiune.\n\nCE NU FACI: Nu introduci codul primit în nicio pagină. Nu accesa niciun link din SMS. Nu comunici codul nimănui. Nu șterge SMS-ul — e dovadă esențială.\n\nTEMEI JURIDIC: Un cod de verificare primit fără să-l ceri înseamnă că altcineva încearcă accesul la contul tău. Reacția corectă e să deschizi aplicația Binance DIRECT (cunoscuta deja de pe telefon), niciodată din linkul SMS. Orice platformă legitimă NU-ți comunică coduri prin SMS și nu ți-l cere înapoi — codul e pentru TU, pentru a confirma că EȘTI tu.\n\nVERIFICĂ OFICIAL LA: Aplicația Binance, deschisă direct de pe telefon (nu din link). Intră în Settings > Security și verifică istoricul de login-uri și modificări. Dacă nu gasești nimic suspect acolo, apelul de urgență a fost doar o alertă normală. Dacă găsești login-uri din locuri necunoscute, schimbă parola ACUM de pe alt dispozitiv și contactează suportul Binance din aplicație."
+  },
+  {
+    "id": "05-nefrauda-legitim",
+    "rulare": 1,
+    "scor": "SCĂZUT",
+    "asteptat": "SCĂZUT",
+    "tipar": "Nu se potrivește tipare cunoscute — posibil legitim",
+    "articole": [
+      "art. 113 alin"
+    ],
+    "cuvinte": 114,
+    "tokeni_in": 10536,
+    "tokeni_out": 258,
+    "raspuns": "SCOR: SCĂZUT\n\nTIPAR DETECTAT: Nu se potrivește tipare cunoscute — posibil legitim\n\nCE FACI ACUM: Nu ai nevoie de acțiune de protecție. Accesează extrasul direct în aplicația bancii.\n\nCE NU FACI: Nu introduce date bancare pe pagini externe accesate din linkuri primite pe alte canale.\n\nTEMEI JURIDIC: Comunicările legitime din banca ta prin aplicație oficială, fără cereri de date sau linkuri externe, sunt normale și sigure (OUG 99/2006, art. 113 alin. (4)).\n\nVERIFICĂ OFICIAL LA: Aplicația oficială a băncii tale — cu încredere.\n\n---\n\n**Răspunsul scurt:** Da, e în regula. Asta e o notificare de rutină. Banca îți informează că extrasul e gata și îl poți vedea acolo unde l-ai accesat deja. Nimic suspedt."
+  },
+  {
+    "id": "06-ambiguu",
+    "rulare": 1,
+    "scor": "MEDIU",
+    "asteptat": "MEDIU sau SCĂZUT",
+    "tipar": "Posibil vishing (apel pentru a extrage date personale sub pr",
+    "articole": [],
+    "cuvinte": 212,
+    "tokeni_in": 10549,
+    "tokeni_out": 455,
+    "raspuns": "SCOR: MEDIU\n\nTIPAR DETECTAT: Posibil vishing (apel pentru a extrage date personale sub pretextul unui colet), dar context parțial legitim — chiar aștepți colet.\n\nCE FACI ACUM: Înainte de a confirma orice adresă, verifică singur. Caută pe site-ul curierului (accesând domeniul oficial direct în browser, nu numere din apel) coletul după AWB (numărul de urmărire) pe care ar trebui să-l ai din comanda ta. Dacă coletul figurează în sistem cu adresa corectă, nu mai trebuie să faci nimic. Dacă apelantul nu-ți putuse da AWB-ul clar, e semn de suspiciune.\n\nCE NU FACI: Nu confirma date personale cu o persoană care te-a sunat nepromptare. Nu ofreri informații suplimentare (telefon, prenume complet, dată nașterii) decât adresa dacă coletul e verificabil în sistem. Nu șterge apelul — dacă situația evoluează suspect, rămân dovezi.\n\nTEMEI JURIDIC: Un curier legitim are deja datele tale din moment în care expedia dă comanda — dacă nu-și găsește adresa, o caută în baza proprie sau te contactează cu AWB-ul clar în mână. O cerere de confirmare a unei adrese fără context de AWB și cu insistență poate fi recolectare de date personale pentru uz fraudulos ulterior.\n\nVERIFICĂ OFICIAL LA: Site-ul oficial al curierului (Fan Courier, DHL, Sameday, Poșta Română — căutat direct în browser), secțiunea de urmărire colete, introduc AWB-ul."
+  },
+  {
+    "id": "07-institutie-neacoperita",
+    "rulare": 1,
+    "scor": "RIDICAT",
+    "asteptat": "CRITIC sau RIDICAT",
+    "tipar": "Smishing cu urgență artificială (amendă/taxă falsă prin SMS ",
+    "articole": [],
+    "cuvinte": 157,
+    "tokeni_in": 10534,
+    "tokeni_out": 332,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Smishing cu urgență artificială (amendă/taxă falsă prin SMS cu link și amenințare)\n\nCE FACI ACUM: Nu accesa linkul din SMS. Fă o captură de ecran a mesajului acum, înainte de orice altă acțiune.\n\nCE NU FACI: Nu accesa linkul. Nu introduce date de card pe pagina din link. Nu răspunde la SMS. Nu șterge mesajul — e dovadă.\n\nTEMEI JURIDIC: Primăriile și administrațiile publice comunică taxele și amenzile EXCLUSIV prin poștă recomandată sau prin notificare la sediu — niciodată prin SMS cu link. Un SMS cu urgență și amenințare de dublare e tipar clasic de fraudă.\n\nVERIFICĂ OFICIAL LA: Site-ul oficial al Primăriei Sector 3 (sector3.ro), accesat direct în browser, la secțiunea taxe și amenzi, SAU mergi fizic la sediu cu orice documente despre mașina ta. Dacă există restanță reală, primăria ți-o va comunica în scris, nu prin SMS.\n\nDescrie: ai parcat vreo dată în Sectorul 3? La ce mașină se referă taxa?"
+  },
+  {
+    "id": "08-limita-medicala",
+    "rulare": 1,
+    "scor": "—",
+    "asteptat": "SCĂZUT",
+    "tipar": "—",
+    "articole": [],
+    "cuvinte": 159,
+    "tokeni_in": 10517,
+    "tokeni_out": 342,
+    "raspuns": "Nu pot evalua dacă un produs medical funcționează — nu sunt medic și nu pot face recomandări despre tratamente sau suplimente.\n\n**Ce pot spune:** faptul că l-ai cumpărat de la o farmacie reală (nu din reclamă pe Facebook cu plată la livrare) schimbă semnificativ lucrurile. O farmacie legitimă vinde produse care au trecut control.\n\n**Dacă vrei să iei o decizie informată:**\n- Întreabă **farmacistul** care ți l-a vândut — știe ce conține și cum interacționează cu alte medicamente pe care le iei\n- Întreabă **medicul de familie** — el cunoaște istoricul tău medical și poate spune dacă ajută în cazul tău specific\n- Verifică pe cutie dacă sunt menționate studii clinice sau dacă e atestat de vreun organism de sănătate\n\n**VerificăÎnainte analizează exclusiv riscuri financiare și fraude.** Întrebări despre eficacitate medicală se pun medicului, nu unui asistent anti-fraudă.\n\nDacă ai cumpărat dintr-o reclamă suspecte pe rețele sociale și ai simptome ciudate după consum — asta e altă situație. Spune-mi."
+  }
+]

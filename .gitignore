@@ -10,5 +10,3 @@ frontend/node_modules/
 # VS Code
 .vscode/
 
-# tests
-tests/

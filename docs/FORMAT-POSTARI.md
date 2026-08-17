@@ -143,6 +143,7 @@ Paletă. Tokenuri Tailwind, citite din graficele publicate.
 | Bordură de câmp de formular | `#CDD7E2` | — |
 | Rând de pas numerotat | `#1E293B` | slate-800 |
 | Banner concluzie | `#064E3B` | emerald-900 |
+| Text nebold în banner (partea „ce faci") | `#E6EFEA` | — |
 
 **Fundalul este gradient vertical, nu culoare plată.** Un fundal uniform se observă
 imediat lângă graficele publicate.

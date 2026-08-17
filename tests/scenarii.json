@@ -42,6 +42,14 @@
       "verifica": "Trebuie să spună: deschide aplicația oficială direct, niciodată linkul."
     },
     {
+      "id": "04b-abonament-suspendat",
+      "scop": "Tipar nou de abonament suspendat. Testează dacă modelul rămâne ferm chiar când o coincidență reală (cardul chiar expirat) face mesajul plauzibil.",
+      "text": "Am primit un SMS de la Netflix că plata a esuat si contul meu va fi suspendat daca nu actualizez datele. Are un link. Chiar am cardul expirat luna asta, asa ca pare sa aiba sens. E real?",
+      "asteptat_scor": "RIDICAT",
+      "asteptat_tipar": "abonament suspendat / plata a eșuat",
+      "verifica": "NU trebuie să valideze mesajul doar pentru că plata eșuată e plauzibilă. Trebuie să spună: actualizarea datelor de plată se face din aplicația oficială sau tastând adresa direct în browser, niciodată din linkul primit prin SMS."
+    },
+    {
       "id": "05-nefrauda-legitim",
       "scop": "TEST DE FALS POZITIV. Mesaj real, legitim. Un model care dă CRITIC aici e stricat.",
       "text": "Am primit notificare in aplicatia bancii ca mi-a fost emis extrasul de cont lunar si il pot vedea in aplicatie. Nu are niciun link, nu imi cere nimic. E in regula?",

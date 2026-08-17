@@ -15,8 +15,12 @@ nu are istoric și nu se poate recupera.
 
 - `FORMAT-POSTARI.md` — structura conținutului de social media: principii, format
   per platformă, paleta și structura graficelor, checklist înainte de postare.
+- `SEO-SPEC.md` — decizia de arhitectură pentru paginile statice de tipar și
+  template-ul de 13 secțiuni. Rămâne referința de bază pentru markup.
+- `SEO-SPEC-V2.md` — extinderea cu 6 pagini noi. Depinde de `SEO-SPEC.md` pentru
+  template și arhitectură; cele două nu se consolidează într-un fișier unic, pentru
+  că ambele conțin texte legale verbatim care nu suportă rescriere.
 
 ## De adăugat
 
-- `SEO-SPEC-V2.md` — specificația paginilor SEO din sitemap
 - `LOGGING-SPEC.md` — specificația logării cererilor de verificare

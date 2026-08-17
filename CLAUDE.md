@@ -120,7 +120,8 @@ The repo contains specification files that constrain output in ways not visible 
 the code. They are the authoritative source, not this file's summaries.
 
 - **Do NOT create or modify any page under `frontend/public/fraude/` without first
-  reading `SEO-SPEC.md` and `SEO-SPEC-V2.md`.** These define the mandatory 13-section
+  reading `docs/SEO-SPEC.md` and `docs/SEO-SPEC-V2.md`.** These define the mandatory
+  13-section
   template, the exact markup conventions to copy from
   `frontend/public/fraude/amenda-falsa-sms/index.html`, and — critically — the
   verbatim legal text for each page. Adding any law article that does not appear in

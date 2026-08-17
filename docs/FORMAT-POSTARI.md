@@ -117,21 +117,37 @@ pentru fraudele cu platforme de criptomonede).
 Formatele pe fundal gri deschis (`#F5F5F5`, antet cu scut și titlu verde centrat)
 sunt istorice. Rămân în postările deja publicate, nu se mai generează.
 
-Paletă:
+Implementarea se află în `docs/grafice/grafic.html`, randată cu
+`docs/grafice/randeaza.py`. Template-ul este sursa de adevăr pentru culoare și
+geometrie; tabelul de mai jos îl documentează. Dacă cele două diverg, template-ul
+are dreptate.
 
-| Rol | Hex |
-|---|---|
-| Fundal | `#171E2E` |
-| Accent roșu (pilulă, ștampilă, buline, link fals) | `#E8412F` |
-| Titlu, rândul 1 | `#FFFFFF` |
-| Titlu, rândul 2 | `#F8A0A0` |
-| Subtitlu | `#8A93A5` |
-| Card mesaj (fundal) | `#F4F6F8` |
-| Text în card | `#1A202C` |
-| Metadate în card (expeditor, „Sponsorizat", „acum") | `#6E7686` |
-| Text bullet | `#D5DAE3` |
-| Banner concluzie | `#0F5138` |
-| URL jos-dreapta | `#6B7688` |
+Paletă. Tokenuri Tailwind, citite din graficele publicate.
+
+| Rol | Hex | Token |
+|---|---|---|
+| Fundal, sus | `#0F172A` | slate-900 |
+| Fundal, jos | `#1E293B` | slate-800 |
+| Pilulă, buton de formular, bulină numerotată | `#DC2626` | red-600 |
+| Ștampilă, buline de listă | `#EF4444` | red-500 |
+| Link fals în card, termenii ofertei | `#B91C1C` | red-700 |
+| Panou de escaladare (ultimul pas) | `#450A0A` | red-950 |
+| Titlu, rândul 1 | `#F8FAFC` | slate-50 |
+| Titlu, rândul 2 | `#FCA5A5` | red-300 |
+| Subtitlu, placeholder de formular | `#94A3B8` | slate-400 |
+| Titlu de secțiune | `#FFFFFF` | — |
+| Text bullet | `#E2E8F0` | slate-200 |
+| Card mesaj (fundal) | `#F1F5F9` | slate-100 |
+| Text în card | `#0F172A` | slate-900 |
+| Metadate în card, URL jos-dreapta | `#64748B` | slate-500 |
+| Bordură de câmp de formular | `#CDD7E2` | — |
+| Rând de pas numerotat | `#1E293B` | slate-800 |
+| Banner concluzie | `#064E3B` | emerald-900 |
+
+**Fundalul este gradient vertical, nu culoare plată.** Un fundal uniform se observă
+imediat lângă graficele publicate.
+
+**Roșul nu este unul, sunt patru**, cu roluri care nu se amestecă.
 
 Structura verticală, de sus în jos:
 

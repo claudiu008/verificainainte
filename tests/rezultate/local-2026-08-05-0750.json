@@ -1,0 +1,38 @@
+[
+  {
+    "id": "03-medical-nou",
+    "rulare": 1,
+    "scor": "RIDICAT",
+    "asteptat": "CRITIC sau RIDICAT",
+    "tipar": "Reclamă frauduloasă pe rețele sociale — produs cu poveste pe",
+    "articole": [],
+    "cuvinte": 278,
+    "tokeni_in": 10981,
+    "tokeni_out": 582,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Reclamă frauduloasă pe rețele sociale — produs cu poveste personală falsă, reducere artificială, plată la livrare (recrutare date personale pentru etapa următoare)\n\nCE FACI ACUM: \n1. Fă o captură de ecran a reclamei și a oricărui email de confirmare, acum, înainte ca reclama să dispară.\n2. Notează unde exact va fi livrarea și ce număr de telefon a dat mama.\n3. Contactează magazinul/curier pentru a anula comanda, dacă e posibil, înainte de livrare.\n\nCE NU FACI: \n- Nu plăti nimănui la telefon dacă apelează pentru „confirmare\".\n- Nu deschide linkuri care sosesc prin SMS după livrare.\n- Nu oferi alte informații dacă apelează cineva zicând că e „farmacist\" sau „medic\" pentru produsul comandat — nu e. Nu răspunde la întrebări despre starea de sănătate, dacă locuiește singură sau cine administrează banii ei.\n- Nu șterge emailul de comandă — e dovadă.\n\nTEMEI JURIDIC: Produsele pentru boli sunt reglementate și necesită dovadă medicală — reclamele cu povești personale și imagini furate de persoane reale, fără dovezi, sunt fraudă comercială. Scopul principal al reclamei nu e produsul, ci obținerea numelui și numărului de telefon pentru exploatare în etapa următoare.\n\nVERIFICĂ OFICIAL LA: Site-ul oficial al magazinului (dacă există — de regulă nu are domeniu real), sau contactează direct brandul pe site-ul seu oficial, cu detaliile comenzii.\n\n⚠️ **IMPORTANT**: După livrare, va suna cineva care se va prezenta drept medic, farmacist sau consultant și va întreba cum se simte mama, ce mai ia de tratament, dacă locuiește singură. Aceasta E FRAUDA — nu răspunde la aceste întrebări și nu accepta niciun „tratament personalizat\" plătit în avans. Dacă e nevoie de sfat medical, merge la medicul de familie."
+  },
+  {
+    "id": "03-medical-nou",
+    "rulare": 2,
+    "scor": "RIDICAT",
+    "asteptat": "CRITIC sau RIDICAT",
+    "tipar": "Reclamă frauduloasă de produs „medical\" pe rețele sociale — ",
+    "articole": [],
+    "cuvinte": 303,
+    "tokeni_in": 10981,
+    "tokeni_out": 633,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Reclamă frauduloasă de produs „medical\" pe rețele sociale — construcție de încredere prin poveste personală + presiune de timp + date personale colectate în formular.\n\nCE FACI ACUM: \n1. Fă o captură de ecran a reclamei (chiar și acum, daca e încă disponibilă pe Facebook).\n2. Contactează banca/serviciul de plăți cu care era gândită plata — dacă nu a fost încă efectuată, canceează.\n3. Nu primi coletul, sau refuză la livrare dacă ajunge — nu semnează și nu plăti.\n\nCE NU FACI: \nNu completa date suplimentare dacă cineva sună „pentru verificare comandă\" — orice apel nesolicitat după ce ai dat date pe o reclamă de genul asta e suspect. Nu instala nicio aplicație. Nu oferi alte date personale, CNP sau detalii despre sănătate.\n\nTEMEI JURIDIC: Niciun produs prezentat ca tratament pentru o boală nu poate fi vândut prin reclamă pe rețele sociale fără dovadă medicală autorizată de Agenția Medicamentului. O companie legitimă nu colectează date în formular și nu folosește povestea unui „pacient\" care se vindecă, fără verificare. Este tiparul unei fraude în două etape — colectarea datelor e scopul real, vânzarea „produsului\" e secundară.\n\nVERIFICĂ OFICIAL LA: Site-ul oficial al brandului real (dacă există) — căutat direct în browser, nu din linkul reclamei. Compară domeniul din reclamă (des .top sau .xyz) cu domeniul oficial (obicei .ro).\n\n---\n\n**ATENȚIE — etapa 2 a acestei fraude:**\n\nÎn următoarele zile, cineva poate să sune mama ta și să se prezinte drept „medic\", „farmacist\" sau „consultant al firmei\", spunând că verifică comanda. NU e verificare — e profiling: va întreba dacă locuiește singură, ce alte tratamente ia, cine îi administrează banii, cum se simte. \n\n**Dacă primește un apel de genul asta, trebuie să închidă și să nu răspundă la alte tentative.** Nicio companie nu sună pentru a întreba cine administrează banii pacientului."
+  },
+  {
+    "id": "03-medical-nou",
+    "rulare": 3,
+    "scor": "RIDICAT",
+    "asteptat": "CRITIC sau RIDICAT",
+    "tipar": "Reclamă medicală falsă pe rețele sociale — produse pentru bo",
+    "articole": [],
+    "cuvinte": 228,
+    "tokeni_in": 10981,
+    "tokeni_out": 502,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Reclamă medicală falsă pe rețele sociale — produse pentru boală, poveste personală, presiune de timp, date colectate pentru revictimizare\n\nCE FACI ACUM: \n1. Păstrează captură de ecran a reclamei (dacă mai e vizibilă), a confirmării comenzii și a oricărui mesaj primit după comandă.\n2. Anunță imediat băncile (dacă a folosit card) că poate urma o fraudă — spune-le să monitorizeze contul pentru tranzacții suspecte următoare.\n\nCE NU FACI: Nu da informații suplimentare nimănui pe telefon despre comenză, nu instala nicio aplicație „pentru tracking\", nu confirma dări din nou — dacă sună cineva (medic, farmacie) spunând că verifică comanda, nu e legitim.\n\nTEMEI JURIDIC: Produsele pentru boli vândute prin reclame pe rețele sociale fără dovezi medicale și care colectează date personale respectă tiparul unei fraude comerciale — scopul real e profilarea pentru extrageri ulterioare, nu vânzarea produsului.\n\nVERIFICĂ OFICIAL LA: Când sosește coletul (dacă sosește), verifi-l pe site-ul curierului, nu din linkuri primite.\n\n**ATENȚIE IMPORTANTĂ:** După comandă, mama va primi probabil o **apel de la cineva care se prezintă drept medic/farmacist/consultant** și va întreba aparent despre produs, dar în realitate vor fi întrebări despre sănătate, dacă locuiește singură, cine îi administrează banii. E etapa a doua a fraudei — profilare pentru extrageri de bani mai mari. **Nu răspunde la astfel de apeluri.** Dacă primește apel neașteptat despre comandă, închide și verifică direct numărul pe Google."
+  }
+]

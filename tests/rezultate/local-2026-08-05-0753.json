@@ -1,0 +1,74 @@
+[
+  {
+    "id": "03-medical-nou",
+    "rulare": 1,
+    "scor": "RIDICAT",
+    "asteptat": "RIDICAT",
+    "tipar": "Reclamă cu poveste personală pentru produs „medicinal\" — eta",
+    "articole": [],
+    "cuvinte": 258,
+    "tokeni_in": 10981,
+    "tokeni_out": 570,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Reclamă cu poveste personală pentru produs „medicinal\" — etapa 1 a fraudei (recrutare date personale). Mama ta a intrat în ciclul de target.\n\nCE FACI ACUM: \n1. Fă o captură de ecran cu reclama dacă mai e vizibilă pe Facebook. \n2. Anulează comanda DACĂ POȚI, înainte de a se expedia — contactează direct Facebook/platforma, nu reclama. \n3. Nu vorbi cu nimeni care va suna despre această comandă în următoarele zile.\n\nCE NU FACI: \n- Nu oferi alte date personale / suplimentare despre sănătate. \n- Nu deschide linkuri din mesaje sau apeluri legate de această comandă. \n- Nu plăti nimic în plus, nici „taxe\", nici „consultații\". \n- Nu permite accesul la ecranul telefonului dacă cineva sună zicând că e „medic\" sau „farmacist\" care verifică comanda.\n\nTEMEI JURIDIC: Produsele prezentate ca tratamente pentru boli, vândute prin reclame pe rețele sociale fără dovadă medicală, nu sunt vânzări legitime — sunt adesea prag pentru etapa următoare a fraудei (apeluri cu profiling — întrebări despre locuit singur, tratamente actuale, bani).\n\nVERIFICĂ OFICIAL AT: Contactează direct Facebook (Privacy Shield, Report Ads), nu din linkul reclamei. Apoi întreba medicul mamei sale despre eficacitatea capsulelor — nicio dovedință științifică, orice promisiune de vindecare e semnal.\n\n**Detaliu important**: Chiar dacă produsul ar ajuta, modelul vânzării (poveste dramatică + urgență + preț redus + date culese = țintă pentru apeluri viitoare) rămâne tipar de fraudă. Urmează etapa 2: apeluri din partea unor „medici\" care pun întrebări ciudate. Avertizează-o pe mama să NU răspundă la apeluri legate de această comandă — pur și simplu închide."
+  },
+  {
+    "id": "03-medical-nou",
+    "rulare": 2,
+    "scor": "RIDICAT",
+    "asteptat": "RIDICAT",
+    "tipar": "Reclamă frauduloasă cu poveste personală — etapa 1 a unei fr",
+    "articole": [],
+    "cuvinte": 308,
+    "tokeni_in": 10981,
+    "tokeni_out": 659,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Reclamă frauduloasă cu poveste personală — etapa 1 a unei fraude mai largi (recrutare date personale)\n\nCE FACI ACUM:\n1. **Oprește orice plată dacă mai e timp** — contactează curerul ÎNAINTE de livrare și anulează comanda dacă e posibil.\n2. **Fă captură de ecran a reclamei** (dacă mai e disponibilă) — URL-ul complet, textul, imaginea, tot.\n3. **Pregătește-te pentru apeluri** — în zilele următoare, cineva va suna pretinzând a fi medic/farmacist despre comanda asta, și va pune întrebări despre locuitul singur, sănătate, bani. NU răspunde la astea.\n\nCE NU FACI:\n- Nu confirma nimic la telefon dacă sună cineva zicând că e de la „medicul pe care ai comandat\".\n- Nu oferi informații despre cine administrează banii mamei tale.\n- Nu instala nicio aplicație dacă apelantul o cere.\n- Nu șterge reclama — e dovadă.\n\nTEMEI JURIDIC: Nicio companie legitimă nu vinde „tratamente\" pentru boli prin reclame pe rețele sociale, cu povești dramatice și imagini de persoane neexistente — lipsa dovezilor medicale și presiunea (reducere 50%, ultimele bucăți) sunt semnalele unei fraude.\n\nVERIFICĂ OFICIAL LA: Domeniul exact al brandului pe care cere să-l căutați, direct în browser — nu din linkul reclamei. Dacă domeniul din reclamă e ciudat (.top, .xyz, sau o literă schimbată), e fals.\n\n---\n\n**ATENȚIE IMPORTANTĂ pentru mamă:** Scopul reclamei NU a fost vânzarea produsului, ci obținerea numelui și numărului ei. Etapa următoare vine la telefon — un „medic\" care va fi foarte politicos și care va pune întrebări aparent medicale, dar care vor fi despre locuitul singur, tratamentele pe care le ia, cine se ocupă de banii ei. Răspunsurile acestea vor fi folosite în etapa 3, care poate fi cerere de bani. \n\n**Dacă sună cineva:** cere-i numărul dosarului medical și suna tu înapoi la spitalul/clinica menționată, cu numărul pe care îl găsești tu — nu pe cel dat de apelant."
+  },
+  {
+    "id": "03-medical-nou",
+    "rulare": 3,
+    "scor": "RIDICAT",
+    "asteptat": "RIDICAT",
+    "tipar": "Reclamă frauduloasă pentru produs „medical\" — etapa 1 (recru",
+    "articole": [],
+    "cuvinte": 239,
+    "tokeni_in": 10981,
+    "tokeni_out": 524,
+    "raspuns": "SCOR: RIDICAT\n\nTIPAR DETECTAT: Reclamă frauduloasă pentru produs „medical\" — etapa 1 (recrutare de date personale și validare).\n\nCE FACI ACUM: \n1. Păstrează captura de ecran a reclamei și a formularului de comandă — vor fi dovezi.\n2. Anulează comanda dacă e încă posibil, dinainte de a se livra.\n3. Pregătește-te pentru etapa 2: în zilele următoare vor suna și vor pune întrebări ciudate despre sănătate, cine locuiește cu mama, cine îi administrează banii.\n\nCE NU FACI: Nu pune bani în avans. Nu-i da numărul cardului curierei dacă sună. Nu apela la numărul din reclamă — nu-l contacta pe ei. Nu șterge reclamă, nu șterge comanda — sunt dovezi.\n\nTEMEI JURIDIC: Nicio companie legitimă nu vinde tratamente pentru boli prin reclame pe rețele sociale cu povestea unei persoane (auzisă și falsă) și fără nicio dovadă medicală — acesta e tiparul standard al unei fraude comerciale cu recrutare de date vulnerabile.\n\nVERIFICĂ OFICIAL LA: Domeniul site-ului folosit în reclamă — privește dacă e .ro și oficial, sau ciudat (.top, .xyz). Ia seria produsului, dacă există, și caută-l pe site-ul brandului real — nu din link-ul reclamei. Dacă pe site-ul oficial NU găsești produsul exact, reclama e falsă.\n\n**Atenție:** După plăți, vor suna pretinzând a fi farmacist/medic — nu sunt. Anunță mama cum să recunoască apeluri suspecte: apeluri neașteptate care întreabă cum stă de sănătate, dacă locuiește singură, cine o ajută cu banii — semnale că sunt atacatori, nu suport comercial."
+  },
+  {
+    "id": "03b-medical-apel",
+    "rulare": 1,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC",
+    "tipar": "Fraudă în etapa 2 — apel de „verificare farmaceutică\" după c",
+    "articole": [],
+    "cuvinte": 305,
+    "tokeni_in": 11022,
+    "tokeni_out": 627,
+    "raspuns": "STOP\nSCOR: CRITIC\nTIPAR DETECTAT: Fraudă în etapa 2 — apel de „verificare farmaceutică\" după comandă pe reclame false (profilare pentru exploatare financiară sau acces la cont)\n\nCE FACI ACUM: \n1. Fă o captură de ecran a anunțului de pe Facebook de pe care ai comandat — data, imaginea, textul exact.\n2. Nu lua niciun tratament pe care te-ar suna cu propuneri — orice „tratament personalizat\" care urmează va fi urmat de cerere de bani în avans sau de acces la dispozitiv.\n3. Anunță imediat banca ta că ai dat date (telefon, adresă) pe o reclamă și că ai primit apel de confirmare — contul poate fi monitorizat acum.\n\nCE NU FACI: \n- Nu răspunde la următoarele apeluri de la acel număr.\n- Nu instala nicio aplicație dacă ți se propune „pentru a-ți monitoriza tratamentul\".\n- Nu trimite bani în avans pentru „tratament personalizat\" sau „medicament special\".\n- Nu da numărul de card, detalii de cont sau PIN.\n- Nu șterge conversația WhatsApp/SMS cu acel număr — e dovadă.\n\nTEMEI JURIDIC: \nAceasta nu este o verificare comercială legitimă — întrebările despre locuit singură, tratamente medicale și cine îți administrează banii sunt instrumente de profilare pentru exploatare. Nicio companie care vinde produse nu are nevoie să cunoască aceste detalii pentru a verifica o comandă.\n\nVERIFICĂ OFICIAL LA: \nMergi din proprie inițiativă la medicul tău de familie și întreabă-l dacă cunoaște produsul și marca din reclama. Pentru orice produs medical, medicul sau farmacistul local sunt singurele surse de îndrumări fiabile. Raportează reclama pe Facebook (butonul cu 3 puncte → „Raportare\").\n\n---\n\n**Important:** Sumele mici plătite la livrare au fost parte a schemei — să confirme că ești real și plătești. Următoarea etapă va fi o cerere mai mare: taxă pentru „tratament personalizat\", depunere pentru „acces la program premium\", sau să primești și să trimiți bani pentru altcineva."
+  },
+  {
+    "id": "03b-medical-apel",
+    "rulare": 2,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC",
+    "tipar": "Escrocherie medicală în etapa 2 (profilare după fraudă iniți",
+    "articole": [],
+    "cuvinte": 333,
+    "tokeni_in": 11022,
+    "tokeni_out": 742,
+    "raspuns": "STOP\nSCOR: CRITIC\n\nTIPAR DETECTAT: Escrocherie medicală în etapa 2 (profilare după fraudă inițială) — apel fals de la „farmacist/medic\" care pune întrebări de vulnerabilitate, nu întrebări comerciale.\n\nCE FACI ACUM: \n1. Fă captură de ecran a reclamei Facebook pe care ai văzut-o inițial (dacă mai e disponibilă) și cu poze ale produsului dacă l-ai primit.\n2. Bloc acest număr de telefon imediat.\n3. Nu mai răspunde la nicio apelare de la persoane necunoscute cu referire la această comandă.\n\nCE NU FACI: \n- Nu oferi nicio informație suplimentară dacă sună din nou — nu confirm starea de sănătate, locuitul singur, sau banii pe care-i ai.\n- Nu accepta niciun „tratament personalizat\" prețos oferit în viitoarele apeluri.\n- Nu instala nicio aplicație pentru a vedea „consulturi medicale online\" sau pentru a-i da cuiva acces la ecranul telefonului.\n- Nu transfera nicio sumă de bani în avans pentru medicamente sau servicii.\n\nTEMEI JURIDIC: \nNicio persoană legitimă care sună cu referire la o comandă nu întreabă dacă locuiești singur, ce tratamente iei sau cine îți administrează banii — aceste întrebări sunt de profilare pentru exploatare financiară și emotivă, caracteristice escrocheriei. Autoritatea de Supraveghere Financiară (ASF) și farmacisții reali nu contactează clienții prin apeluri telefonice nesolicitate cu profiluri medicale (OUG 93/2012, principiu general).\n\nVERIFICĂ OFICIAL LA: \nSite-ul Colegiului Farmaciștilor din România, dacă dorești să confirmi dacă o persoană reală e farmacist. Dar NU da numărul telefonic pe care ți l-a dat — verifica din proprie inițiativă.\n\n---\n\n**Context clar:** Reclama Facebook a fost FRAUDULENTĂ. Comanda pe care ai făcut-o a permis atacatorilor să obțină numele și telefonul tău — bani reali, chiar dacă produsul nu exista sau era inutil. Acum te contactează din nou pentru etapa 2: să-ți măsoară vulnerabilitatea (locuiești singur? cine îți controlează banii?) și să te exploateze financial, cu o „consulență medicală\" scumpă, o aplicație falsă sau cu cererea de a transfera bani pentru „tratament personalizat\".\n\n**Dacă sună din nou:** Spune-i clar „nu sunt interesată\" și închide apelul. Nu trebuie să-i dai nicio explicație."
+  },
+  {
+    "id": "03b-medical-apel",
+    "rulare": 3,
+    "scor": "CRITIC",
+    "asteptat": "CRITIC",
+    "tipar": "Escrocherie medicală — apel de „verificare comandă\" cu chest",
+    "articole": [],
+    "cuvinte": 271,
+    "tokeni_in": 11022,
+    "tokeni_out": 574,
+    "raspuns": "STOP\nSCOR: CRITIC\n\nTIPAR DETECTAT: Escrocherie medicală — apel de „verificare comandă\" cu chestionar de profilare (stare de sănătate, locuire singură, sprijin familial)\n\nCE FACI ACUM:\n1. Fă o captură de ecran sau notează: cine te-a sunat (nume, companie), ce te-a întrebat, ora apelului — chiar dacă a fost amabil, conversația asta e dovadă.\n2. Oprește orice contact ulterior — dacă te mai sună, nu răspunde și nu salva numărul.\n3. Nu instala nicio aplicație pe care ți-o recomandă, nu trimite bani și nu lua niciun produs pe care ți-l propune.\n\nCE NU FACI:\n- Nu da nicio altă informație personală — nici CNP, nici date de card, nici de cont bancar.\n- Nu accepta plăți în avans pentru „tratament personalizat\".\n- Nu instala o aplicație pe telefon „ca să urmărești progresul tratamentului\".\n- Nu șterge apelul sau notele — sunt dovadă.\n\nTEMEI JURIDIC:\nUn farmacist sau consultant legit nu pun niciodată întrebări despre locuit singură, cine te ajută acasă sau situația medicală completă fără o consultație reală — asta e chestionar de profilare pentru exploatare. Orice contact care amestecă „verificarea unei comenzi\" cu întrebări despre vulnerabilitate personală intră sub tipar de fraude medicale.\n\nVERIFICĂ OFICIAL LA:\nSite-ul oficial al brandului produsului comandat, accesat direct în browser, la secțiunea contact — nu reîncerca compania de pe apel.\n\n---\n\n**IMPORTANT:** Nu lua niciun produs care nu-ți recomandă medicul tău. Dacă ai deja capsulele din comanda originală și au venit pe poștă, NU le iei — arată-le medicului de familie înainte de orice, și spune-i din ce sursă le-ai comandat. O substanță necunoscută poate face rău cu medicamentele pe care le iei deja."
+  }
+]

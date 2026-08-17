@@ -114,6 +114,29 @@ Single-component app, no router, no state management library:
   legislative PDFs. Never edit article numbers or add citations
   without explicit instruction.
 
+## Specification files — read before editing
+
+The repo contains specification files that constrain output in ways not visible in
+the code. They are the authoritative source, not this file's summaries.
+
+- **Do NOT create or modify any page under `frontend/public/fraude/` without first
+  reading `SEO-SPEC.md` and `SEO-SPEC-V2.md`.** These define the mandatory 13-section
+  template, the exact markup conventions to copy from
+  `frontend/public/fraude/amenda-falsa-sms/index.html`, and — critically — the
+  verbatim legal text for each page. Adding any law article that does not appear in
+  those files is forbidden, including articles that appear correct.
+- **Do NOT produce social media content, graphics, or captions without first reading
+  `docs/FORMAT-POSTARI.md`.** It defines the graphic palette and layout, the
+  per-platform post structure, the pill label rules (TIPAR NOU vs ALERTĂ NOUĂ), and
+  two hard prohibitions: no date anywhere on a graphic, and no entity named in either
+  graphic or text other than the brand being impersonated.
+- `docs/README.md` states the sync rule for these files: the repo is the source of
+  truth, and the copy uploaded into Claude project knowledge is downstream of it.
+
+If a task touches an area covered by a spec file, read the spec file first even when
+the request seems small or self-contained. A request phrased as a minor edit is still
+governed by the spec.
+
 ## Audience
 85% mobile, 53% Android, 85% Romania, 67% arriving from Threads.
 Mobile-first is not optional.

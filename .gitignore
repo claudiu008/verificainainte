@@ -10,3 +10,8 @@ frontend/node_modules/
 # VS Code
 .vscode/
 
+# Randări de test din docs/grafice/ (nu artefacte publicabile)
+docs/grafice/test*.png
+docs/grafice/reprodus*.png
+docs/grafice/grafic.png
+

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!--
+  VerificăÎnainte — template grafic 1080×1080, format navy.
+  Se randează cu Playwright/Chromium: vezi docs/grafice/randeaza.py
+
+  CE SE MODIFICĂ: doar blocul <main> de la finalul fișierului.
+  CE NU SE MODIFICĂ: variabilele din :root și regulile CSS.
+
+  Paleta e Tailwind. Valorile au fost citite din graficele publicate,
+  nu alese manual. Nu le schimba fără motiv explicit.
+-->
+<meta charset="utf-8">
+<style>
+  :root {
+    /* Fundal: gradient vertical, NU culoare plată */
+    --bg-top: #0F172A;
+    /* slate-900 */
+    --bg-bottom: #1E293B;
+    /* slate-800 */
+
+    /* Trei roșii distincte, cu roluri diferite */
+    --red-solid: #DC2626;
+    /* red-600  — pilulă, buton, bulină numerotată */
+    --red-accent: #EF4444;
+    /* red-500  — ștampilă, buline de listă */
+    --red-deep: #B91C1C;
+    /* red-700  — link fals în interiorul cardului deschis */
+    --red-panel: #450A0A;
+    /* red-950  — panoul de escaladare (ultimul pas) */
+
+    --title-1: #F8FAFC;
+    /* slate-50  — primul rând de titlu */
+    --title-2: #FCA5A5;
+    /* red-300   — al doilea rând de titlu */
+    --subtitle: #94A3B8;
+    /* slate-400 — subtitlu, placeholder de formular */
+    --section: #FFFFFF;
+    /* titlu de secțiune */
+    --body: #E2E8F0;
+    /* slate-200 — text de bullet */
+
+    --card-bg: #F1F5F9;
+    /* slate-100 — cardul deschis */
+    --card-text: #0F172A;
+    /* slate-900 — text în cardul deschis */
+    --card-meta: #64748B;
+    /* slate-500 — expeditor, „Sponsorizat", subsol */
+    --card-border: #CDD7E2;
+    /* bordură de câmp de formular */
+
+    --panel-bg: #1E293B;
+    /* slate-800 — rând de pas numerotat */
+    --banner: #064E3B;
+    /* emerald-900 — bannerul de concluzie */
+    --url: #64748B;
+    /* slate-500 */
+
+    --pad: 72px;
+    /* marginile stânga/dreapta, identice */
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+    font-family: "Liberation Sans", Inter, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow: hidden;
+  }
+
+  main {
+    position: absolute;
+    inset: 0;
+    padding: 71px var(--pad) 22px var(--pad);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- PILULĂ ---------- */
+  .pill {
+    align-self: flex-start;
+    background: var(--red-solid);
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    padding: 14px 70px;
+    border-radius: 999px;
+  }
+
+  /* ---------- TITLU ---------- */
+  h1 {
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.18;
+    margin-top: 28px;
+  }
+
+  h1 .a {
+    color: var(--title-1);
+    display: block;
+  }
+
+  h1 .b {
+    color: var(--title-2);
+    display: block;
+  }
+
+  .subtitle {
+    color: var(--subtitle);
+    font-size: 27px;
+    margin-top: 16px;
+  }
+
+  /* ---------- CARD DESCHIS (comun celor 3 variante) ---------- */
+  .card {
+    background: var(--card-bg);
+    color: var(--card-text);
+    border-radius: 22px;
+    padding: 28px 38px 30px;
+    margin-top: 44px;
+    width: 714px;
+    /* lățimea variază după conținut: 714–760px */
+    position: relative;
+  }
+
+  /* Codița apare DOAR pe mesaje primite (SMS, WhatsApp), nu pe postări publice */
+  .card.tail::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: -1px;
+    width: 34px;
+    height: 26px;
+    background: var(--card-bg);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+
+  .card .meta {
+    color: var(--card-meta);
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .card .msg {
+    font-size: 27px;
+    line-height: 1.30;
+    margin-top: 20px;
+  }
+
+  .card .msg .link {
+    color: var(--red-deep);
+    font-weight: 700;
+  }
+
+  .card .foot {
+    color: var(--card-meta);
+    font-size: 24px;
+    margin-top: 10px;
+  }
+
+  .card .terms {
+    color: var(--red-deep);
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+
+  /* Variantă postare sponsorizată */
+  .poster {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .poster .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #D7DEE7;
+  }
+
+  .poster .who {
+    line-height: 1.25;
+  }
+
+  .poster .who b {
+    font-size: 27px;
+  }
+
+  .poster .who span {
+    display: block;
+    color: var(--card-meta);
+    font-size: 24px;
+  }
+
+  /* Variantă formular */
+  .form h3 {
+    font-size: 29px;
+  }
+
+  .form .promo {
+    color: var(--card-meta);
+    font-size: 25px;
+    margin-top: 10px;
+  }
+
+  .form .field {
+    background: #fff;
+    border: 2px solid var(--card-border);
+    border-radius: 10px;
+    color: var(--subtitle);
+    font-size: 27px;
+    padding: 18px 22px;
+    margin-top: 22px;
+    width: 660px;
+  }
+
+  .form .cta {
+    background: var(--red-solid);
+    color: #fff;
+    font-size: 27px;
+    font-weight: 700;
+    padding: 18px 40px;
+    border-radius: 10px;
+    margin-top: 26px;
+    width: fit-content;
+  }
+
+  /* ---------- ȘTAMPILĂ ---------- */
+  /* Se pune DOAR când cardul reproduce capcana. Niciodată pe pași numerotați. */
+  .stamp {
+    position: absolute;
+    border: 5px solid var(--red-accent);
+    border-radius: 14px;
+    color: var(--red-accent);
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 26px 40px;
+    transform: rotate(-9deg);
+  }
+
+  /* ---------- PAȘI NUMEROTAȚI (variantă fără card) ---------- */
+  .steps {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step {
+    background: var(--panel-bg);
+    border-radius: 14px;
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .step.escalate {
+    background: var(--red-panel);
+  }
+
+  .step .num {
+    flex: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--red-solid);
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step b {
+    color: var(--section);
+    font-size: 28px;
+    display: block;
+  }
+
+  .step span {
+    color: var(--subtitle);
+    font-size: 26px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  .step.escalate span {
+    color: #FCA5A5;
+  }
+
+  /* Declarație pe două rânduri, folosită doar cu varianta de pași */
+  .statement {
+    margin-top: 34px;
+    color: var(--body);
+    font-size: 29px;
+    line-height: 1.45;
+  }
+
+  .statement b {
+    color: var(--section);
+    display: block;
+  }
+
+  /* ---------- SECȚIUNE + BULINE ---------- */
+  h2 {
+    color: var(--section);
+    font-size: 31px;
+    font-weight: 700;
+    margin-top: 42px;
+  }
+
+  ul {
+    list-style: none;
+    margin-top: 22px;
+  }
+
+  li {
+    color: var(--body);
+    font-size: 28px;
+    line-height: 1.4;
+    padding-left: 40px;
+    position: relative;
+    margin-bottom: 19px;
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 14px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--red-accent);
+  }
+
+  /* ---------- BANNER + URL ---------- */
+  /* Bannerul și URL-ul sunt ancorate la poziție fixă, identică pe toate
+     graficele. Nu curg în flux: dacă textul de deasupra crește prea mult,
+     se suprapune vizibil pe banner — semnal că trebuie scurtat, nu ascuns. */
+  .banner {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    top: 944px;
+    background: var(--banner);
+    border-radius: 10px;
+    color: #E6EFEA;
+    font-size: 28px;
+    padding: 20px 30px;
+    text-align: center;
+  }
+
+  .banner b {
+    color: #fff;
+  }
+
+  .url {
+    position: absolute;
+    right: var(--pad);
+    top: 1028px;
+    color: var(--url);
+    font-size: 26px;
+  }
+</style>
+
+<!--
+  ==========================================================================
+  DE AICI ÎN JOS SE EDITEAZĂ
+  ==========================================================================
+
+  Eticheta pilulei:
+    TIPAR NOU    — mecanism nou, explicat prima dată
+    ALERTĂ NOUĂ  — mecanism cunoscut, campanie activă acum
+
+  Titlul: două rânduri care formează un contrast, nu o propoziție tăiată.
+
+  Cardul — alege UNA din patru variante (exemplele comentate mai jos):
+    A. bulă de mesaj      class="card tail"   (SMS, WhatsApp — mesaj primit)
+    B. postare sponsorizată class="card"      (reclamă publică)
+    C. formular           class="card form"   (pagină de captură de date)
+    D. pași numerotați    <div class="steps"> (fără card, fără ștampilă)
+
+  Ștampila: doar la A, B, C. Poziția se ajustează din stil inline.
+  Bulinele: două sau trei. Descriu mecanismul, nu instrucțiuni.
+  Bannerul: partea nebold = ce faci, partea bold = ce nu faci niciodată.
+-->
+
+<main>
+  <div class="pill">TIPAR NOU</div>
+
+  <h1>
+    <span class="a">Nu-ți cere nimic.</span>
+    <span class="b">Doar te avertizează.</span>
+  </h1>
+  <div class="subtitle">Cod de verificare pe care nu l-ai cerut</div>
+
+  <!-- VARIANTA A: bulă de mesaj -->
+  <div class="card tail" style="width: 714px;">
+    <div class="meta">KuCoin · acum</div>
+    <div class="msg">
+      Cod de verificare: 847263.<br>
+      Se modifică numărul de telefon<br>
+      asociat contului. Dacă nu ai fost tu,<br>
+      verifică aici: <span class="link">[link]</span>
+    </div>
+    <div class="foot">Nu comunica acest cod nimănui.</div>
+  </div>
+  <div class="stamp" style="left: 676px; top: 452px;">CAPCANĂ</div>
+
+  <h2>De ce prinde la oamenii prudenți</h2>
+  <ul>
+    <li>Nu-ți cere bani. Nu-ți cere parola. Nici măcar codul.</li>
+    <li>Pare un sistem de securitate care își face treaba.</li>
+    <li>Te duci singur pe pagina falsă, ca să te aperi.</li>
+  </ul>
+
+  <div class="banner">
+    Deschide aplicația oficială direct. <b>Niciodată linkul din mesaj.</b>
+  </div>
+  <div class="url">verificainainte.ro</div>
+</main>

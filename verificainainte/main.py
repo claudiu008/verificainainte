@@ -71,6 +71,12 @@ class Situatie(BaseModel):
 # V4.4: tiparul „produse medicale" împărțit în două etape — reclama e filtrul de
 # recrutare (nume + telefon), apelul „medicului" e frauda propriu-zisă (profilare,
 # apoi tratament scump / acces la distanță / cont-releu); +criteriu CRITIC (h).
+# V4.5: +tipar abonament suspendat / „plata a eșuat" (servicii de abonament) —
+# plauzibilitatea e vectorul: o problemă reală de plată NU reduce riscul; tiparul
+# nu are temei juridic, deci citarea OUG 99/2006 sau a oricărui articol e interzisă
+# explicit, la fel enumerarea de domenii false inventate. Trimiterea la art. 27
+# OG 2/2001 restrânsă la alin. (1) — alin. (2) privește martorul la afișare, nu
+# modalitatea de comunicare pe care se sprijină concluzia „niciodată prin SMS".
 
 SYSTEM_PROMPT = """Ești VerificăÎnainte — asistent specializat în detectarea fraudelor financiare în România.
  

@@ -19,7 +19,7 @@ function detecteazaScor(text) {
   return null
 }
 
-const EXEMPLU_SMS = "Ministerul Transporturilor: Aveti o amenda de circulatie neplatita de 145 RON. Pentru a evita majorarea cu 100% si transferul la executare silita, achitati in maxim 24h pe ghiseul-ro-plati.com. Introduceti numarul cardului si codul CVV pentru confirmare."
+const EXEMPLU_SMS = "Ministerul Transporturilor: Aveti o amenda de circulatie neplatita de 145 RON. Pentru a evita majorarea cu 100% si transferul la executare silita, achitati in maxim 24h pe ghiseul-ro-plati[.]com. Introduceti numarul cardului si codul CVV pentru confirmare."
 
 const EXEMPLU_REZULTAT = `STOP
 

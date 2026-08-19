@@ -24,6 +24,12 @@ statice acoperă 16 dintre ele. Dintre acestea, 3 tipare nu au încă pagină.
    la prima apariție.
 6. Fără judecată la adresa victimei, în special pe pagina de escrocherie
    sentimentală.
+7. **Domeniile false din exemplele de mesaj se scriu dezactivat, cu paranteze
+   pătrate înaintea TLD-ului:** `ghiseul-ro-plati[.]com`, nu `ghiseul-ro-plati.com`.
+   Sunt domenii inventate, dar înregistrabile de oricine — fără paranteze, pagina
+   ar putea ajunge să tipărească adresa reală a unui site de phishing și să o
+   ofere ca link activ. Domeniile oficiale recomandate (`anaf.ro`, `ghiseul.ro`,
+   `posta-romana.ro` etc.) se scriu normal — ele trebuie să fie ușor de copiat.
 
 ## Sarcini tehnice după generarea unei pagini
 

@@ -413,3 +413,68 @@ pot fi folosite ulterior pentru șantaj / nu șterge conversația — este dovad
 
 **Linkuri interne:** `whatsapp-cont-spart`, `investitii-deepfake`, `/fraude/`
 **Linkuri reciproce de adăugat:** din `whatsapp-cont-spart` și `voce-ai-telefon`
+
+---
+
+## 7. `/fraude/abonament-suspendat-plata-esuata/`
+
+**Title:** SMS că abonamentul Netflix va fi suspendat — e fraudă? | VerificăÎnainte
+**Meta description:** Ai primit un SMS că plata pentru Netflix a eșuat și contul va fi suspendat? Vezi de ce mesajul pare credibil chiar dacă ai o problemă reală de plată.
+**H1:** Ai primit un SMS că abonamentul va fi suspendat pentru că plata a eșuat?
+
+**Exemplu de mesaj fals:**
+> „NETFLIX: Plata a esuat. Accesul dvs. va fi suspendat daca nu va actualizati
+> datele aici: [link]"
+
+Paragraf de context: mesajul vine în numele unui serviciu de abonament folosit
+zilnic (Netflix, HBO Max, Spotify, YouTube Premium, Disney+), anunță o plată eșuată
+și cere actualizarea datelor printr-un link. Poate ajunge și pe email, cu aceeași
+structură.
+
+**3 semne:**
+1. **Plauzibilitatea este capcana, nu o coincidență.** Plățile eșuate există în
+   realitate — card expirat, tranzacție refuzată de bancă. Mesajul nu cere nimic
+   neobișnuit; cere un lucru normal, într-un loc greșit. Dacă ai chiar o problemă de
+   plată, potrivirea nu confirmă mesajul: cardurile expiră lunar la mii de oameni,
+   iar mesajele se trimit în masă.
+2. Amenințarea cu suspendarea nu produce suspiciune, produce grabă. Un serviciu real
+   nu îți taie accesul printr-un mesaj cu termen scurt.
+3. Linkul duce pe o pagină clonă, identică vizual, găzduită pe un domeniu construit
+   să semene cu numele brandului prin litere lipsă sau cuvinte adăugate. Diferența e
+   de câteva caractere și nu se observă pe ecranul telefonului.
+
+**Ce faci ACUM:** nu deschide linkul / deschide aplicația oficială instalată pe
+telefon sau tastează adresa brandului direct în browser / verifică starea
+abonamentului acolo / actualizează cardul doar din aplicație sau din contul oficial.
+
+**Ce NU faci:** nu deschide linkul din mesaj / nu introduce datele cardului pe pagina
+din link / nu răspunde la mesaj / nu șterge mesajul — este dovadă.
+
+**Ce spune legea (verbatim):**
+> Serviciile de abonament sunt companii private, nu instituții publice, deci aici nu
+> se aplică regulile de comunicare oficială. Se aplică în schimb un principiu simplu:
+> o companie legitimă nu îți cere datele cardului printr-un link primit nesolicitat
+> și nu rezolvă o problemă de plată în afara aplicației sau a contului tău. Locul în
+> care se actualizează un card este contul, nu un mesaj.
+>
+> Dacă ai introdus datele cardului, fapta este o infracțiune și poate fi reclamată la
+> Poliție. Păstrează mesajul și captura paginii — fără ele, plângerea rămâne fără
+> probe. Sună banca și cere blocarea cardului: datele permit plăți recurente, nu doar
+> o singură tranzacție.
+
+**FAQ:**
+1. Am introdus datele cardului. Ce fac acum? → sună imediat banca și cere blocarea
+   cardului; datele complete permit plăți repetate, nu una singură; depune plângere la
+   Poliție cu mesajul și captura paginii.
+2. Cum verific dacă plata mea a eșuat într-adevăr? → deschizi aplicația oficială sau
+   contul de pe site-ul brandului, tastat de tine în browser; dacă există o problemă
+   reală, o vezi acolo; dacă aplicația nu spune nimic, mesajul e fals.
+3. Cardul meu a expirat chiar luna asta. Nu înseamnă că mesajul e real? → nu.
+   Cardurile expiră în fiecare lună la mii de oameni, iar mesajele se trimit în masă.
+   Coincidența e motivul pentru care tiparul funcționează, nu o confirmare.
+4. Linkul arăta ca adresa oficială. Cum e posibil? → domeniile false sunt construite
+   să semene cu numele brandului, prin litere lipsă sau cuvinte adăugate. Diferența e
+   de câteva caractere și nu se observă pe ecranul telefonului.
+
+**Linkuri interne de pe pagina asta:** `colet-blocat-curier`, `whatsapp-cont-spart`, `/fraude/`
+**Linkuri reciproce de adăugat:** din `colet-blocat-curier` și `whatsapp-cont-spart`

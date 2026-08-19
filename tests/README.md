@@ -18,7 +18,7 @@ puțin rezultatul absolut, mai mult **diferența față de rularea anterioară**
 |----|-------------|---------------|
 | 01 | tipar de la **începutul** listei — mai e văzut? | CRITIC |
 | 02 | tipar de la **mijlocul** listei — poziția cea mai vulnerabilă | CRITIC |
-| 03 | tipar medical, **etapa 1** (reclama) + limita medicală | RIDICAT |
+| 03 | tipar medical, **etapa 1** (reclama) + limita medicală | CRITIC sau RIDICAT |
 | 03b | tipar medical, **etapa 2** — apelul „medicului"; profilare, nu vânzare | CRITIC |
 | 04 | tipar V4.2, mecanism inversat | CRITIC |
 | 04b | **abonament suspendat** — rămâne ferm când o coincidență reală face mesajul plauzibil | RIDICAT |
@@ -141,11 +141,28 @@ Rulare 2026-08-19, prompt V4.7 (~15.000 tokeni, 40.466 caractere), Haiku 4.5
 
 ### Abaterea rămasă
 
-**03 variază între RIDICAT și CRITIC.** Istoric: RIDICAT de 8 ori, CRITIC de 5 ori.
-Nu e regresie, e nedeterminism — vezi regula de interpretare de mai sus. Merită
-totuși revizuit dacă așteptarea `RIDICAT` din `scenarii.json` mai e corectă:
-criteriul CRITIC (g) din prompt descrie literal acest scenariu, deci CRITIC e
-apărabil.
+**03 variază între RIDICAT și CRITIC** — istoric: RIDICAT de 8 ori, CRITIC de 5.
+Rezolvat pe 19 august prin lărgirea așteptării la „CRITIC sau RIDICAT", ca la 06
+și 07, din trei motive:
+
+1. Criteriul CRITIC (g) din prompt — „produs prezentat ca tratament pentru o
+   boală, vândut prin reclamă pe rețele sociale, fără dovadă medicală" — descrie
+   scenariul 03 cuvânt cu cuvânt, iar regula spune „primul care se potrivește
+   decide". Deci CRITIC nu e o abatere, e ce cere promptul.
+2. Textul tiparului din prompt spune însă altceva: etapa 1 e filtrul de
+   recrutare, frauda propriu-zisă e apelul de la etapa 2. Din unghiul ăsta,
+   RIDICAT e la fel de apărabil — și e ce răspunde modelul mai des.
+3. Sfatul nu depinde de etichetă. În ambele rulări din 19 august modelul a numit
+   situația „etapa 1 a unei fraude cu mai mulți pași" și a avertizat despre
+   apelul care urmează. Ce trebuie să prindă 03 e că tiparul e văzut și că limita
+   medicală ține — nu culoarea bannerului.
+
+**Rămâne o inconsecvență în prompt**, nerezolvată intenționat: criteriul (g) și
+textul tiparului medical trag în direcții diferite. Îngustarea lui (g) — ca etapa
+1 să fie explicit RIDICAT, iar (h) să acopere apelul, cum face deja — ar alinia
+cele două, dar e o modificare a creierului aplicației și cere propria rulare
+înainte/după. Până atunci, așteptarea largă nu ascunde nimic: e documentat aici de
+ce sunt corecte amândouă.
 
 **01 variază și el, între CRITIC și RIDICAT**, dar CRITIC rămâne dominant
 (4 din 5 la `--repeta 5` pe V4.6, 3 din 5 pe V4.5). Verificat explicit după

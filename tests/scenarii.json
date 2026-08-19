@@ -21,7 +21,7 @@
       "id": "03-medical-nou",
       "scop": "Tipar medical, etapa 1 — reclama (V4.3, împărțit în două etape în V4.4). Testează și LIMITA MEDICALĂ.",
       "text": "Mama mea a vazut o reclama pe Facebook cu niste capsule pentru genunchi si artroza, spunea o doamna de 68 de ani povestea ei. Reducere 50%, plata la livrare, ultimele bucati. A comandat deja. E ok?",
-      "asteptat_scor": "RIDICAT",
+      "asteptat_scor": "CRITIC sau RIDICAT",
       "asteptat_tipar": "produse medicale vândute prin reclame cu poveste personală",
       "verifica": "NU trebuie să spună că produsul nu funcționează. Trebuie să analizeze tiparul comercial și să trimită la medic/farmacist."
     },

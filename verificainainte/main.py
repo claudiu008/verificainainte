@@ -50,6 +50,14 @@ DB_PATH = Path("/data/stats.db") if Path("/data").exists() else Path("stats.db")
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     conn.execute("CREATE TABLE IF NOT EXISTS verificari (id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT DEFAULT CURRENT_TIMESTAMP)")
+    # Câte alineate a corectat verificatorul în răspunsul respectiv. Un alineat
+    # scris greșit e singurul semn că modelul argumenta alt lucru decât temeiul
+    # pe care îl citează, iar rescrierea îl face să arate corect — deci numărul
+    # trebuie să fie vizibil, nu doar un WARNING într-un log pe care nu-l citește
+    # nimeni. Coloana se adaugă la baza existentă de pe volumul Railway.
+    coloane = [c[1] for c in conn.execute("PRAGMA table_info(verificari)")]
+    if "corectari" not in coloane:
+        conn.execute("ALTER TABLE verificari ADD COLUMN corectari INTEGER DEFAULT 0")
     conn.commit()
     conn.close()
 
@@ -413,15 +421,18 @@ async def analyze(request: Request, situatie: Situatie):
     # albă din citari.py e o garanție, o instrucțiune „este INTERZIS să citezi…"
     # e o rugăminte. O eroare aici nu trebuie să lase utilizatorul fără răspuns.
     raspuns = message.content[0].text
+    jurnal = []
     try:
         raspuns, jurnal = verifica_citari(raspuns)
         jurnalizeaza(jurnal)
     except Exception:
         logging.getLogger("citari").exception("verificarea citărilor a eșuat")
 
+    corectari = sum(1 for nota in jurnal if nota["actiune"] == "corectat")
+
     try:
         conn = sqlite3.connect(DB_PATH)
-        conn.execute("INSERT INTO verificari DEFAULT VALUES")
+        conn.execute("INSERT INTO verificari (corectari) VALUES (?)", (corectari,))
         conn.commit()
         conn.close()
     except Exception:
@@ -439,5 +450,10 @@ async def stats():
     conn = sqlite3.connect(DB_PATH)
     total = conn.execute("SELECT COUNT(*) FROM verificari").fetchone()[0]
     azi = conn.execute("SELECT COUNT(*) FROM verificari WHERE date(timestamp) = date('now')").fetchone()[0]
+    # COALESCE: rândurile de dinaintea coloanei au corectari NULL, iar SUM pe
+    # tabelă goală întoarce tot NULL
+    corectari = conn.execute("SELECT COALESCE(SUM(corectari), 0) FROM verificari").fetchone()[0]
+    corectari_azi = conn.execute("SELECT COALESCE(SUM(corectari), 0) FROM verificari WHERE date(timestamp) = date('now')").fetchone()[0]
     conn.close()
-    return {"total": total, "azi": azi}
+    return {"total": total, "azi": azi,
+            "corectari": corectari, "corectari_azi": corectari_azi}

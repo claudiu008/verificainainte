@@ -93,12 +93,18 @@ Single-file FastAPI app. Key things to know before editing it:
   This is why guard instructions belong in code rather than in the prompt: a whitelist is a guarantee,
   a prompt line is a request honored probabilistically, and every new guard grows the prompt forever.
 - Every successful `/analyze` call also inserts a row into a `verificari` SQLite table purely as a
-  usage counter (no content is stored, just a timestamp). Counting failures are swallowed
-  (`except Exception: pass`) so they never break the actual API response.
+  usage counter (no content is stored — a timestamp, plus `corectari`, how many alineate the citation
+  check rewrote in that response). Counting failures are swallowed (`except Exception: pass`) so they
+  never break the actual API response. `init_db()` adds the `corectari` column to an existing table if
+  missing, so the Railway volume migrates itself on deploy.
 - `DB_PATH` picks `/data/stats.db` if `/data` exists (Railway volume, persists across redeploys) or
   falls back to a local `stats.db` next to `main.py` (e.g. when testing on Windows).
-- `GET /` is a bare health check; `GET /stats` exposes `{"total": ..., "azi": ...}` (today's count) from
-  the same table.
+- `GET /` is a bare health check; `GET /stats` exposes `{"total": ..., "azi": ..., "corectari": ...,
+  "corectari_azi": ...}` from the same table. The last two are the visible signal that the model cited a
+  wrong alineat: the check rewrites it to the catalog form, which makes the divergence invisible in the
+  answer itself, so it has to be countable somewhere. A rising `corectari_azi` after a prompt edit means
+  the model started arguing a different alineat than the one it cites — read the `citari` WARNING lines
+  in the Railway logs before assuming the prompt edit was harmless.
 - CORS is wide open (`allow_origins=["*"]`) since the frontend is a separately hosted static SPA.
 - `check.py` is a standalone throwaway script (direct `anthropic` call with an older/simpler system
   prompt and a hardcoded test scenario) used for prompt experimentation — it is not imported by

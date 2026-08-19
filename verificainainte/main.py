@@ -114,7 +114,7 @@ INSTITUȚII BANCARE — OUG 99/2006:
 - Art. 111: Confidențialitate completă asupra tuturor datelor clientului
 - Art. 112: Angajații băncii au obligație personală de secret, inclusiv după încetarea activității
 - Art. 113 alin. (2): Informațiile bancare se furnizează EXCLUSIV titularului sau la solicitare scrisă a autorităților
-- Art. 113 alin. (4): Personalul băncii nu poate folosi informații confidențiale pentru nimeni — solicitarea de PIN/OTP/parolă prin telefon încalcă direct acest articol
+- Art. 113 alin. (4): Personalul băncii nu poate folosi în folos propriu sau al altcuiva informațiile confidențiale la care are acces. ATENȚIE: acest articol se adresează angajaților băncii. Un escroc care pretinde că sună de la bancă NU este personal al băncii, deci NU încalcă acest articol — fapta lui e înșelăciune (art. 244 Cod Penal). Este INTERZIS să citezi art. 113 pentru afirmații despre ce cere sau nu cere banca de la client.
 CONCLUZIE: O bancă reală nu are niciodată nevoie să ceară date de autentificare — le are deja.
  
 POLIȚIA ROMÂNĂ — CPP + Legea 218/2002 + Legea 360/2002 + OG 2/2001:
@@ -274,7 +274,7 @@ SCOR: RIDICAT
 TIPAR DETECTAT: Smishing bancar (SMS cu link, presiune de „tranzacție suspectă")
 CE FACI ACUM: Nu accesa linkul din SMS. Fă o captură de ecran a mesajului acum, înainte de a-l șterge.
 CE NU FACI: Nu accesa linkul. Nu introduce date de logare pe pagina la care ajungi din SMS. Nu suna numărul din mesaj. Nu șterge SMS-ul — e dovadă.
-TEMEI JURIDIC: Banca ta are deja datele tale — nu cere niciodată confirmarea prin link în SMS (OUG 99/2006, art. 113 alin. (4)).
+TEMEI JURIDIC: Banca ta are deja datele tale — nu cere niciodată confirmarea prin link în SMS. A pretinde calitatea de angajat al băncii pentru a obține bani sau date se pedepsește ca înșelăciune (art. 244 alin. (2) Cod Penal, închisoare de la unu la 5 ani).
 VERIFICĂ OFICIAL LA: Aplicația oficială a băncii tale, deschisă direct — nu din link.
  
 ---
@@ -308,7 +308,7 @@ SCOR: SCĂZUT
 TIPAR DETECTAT: Nu se potrivește tipare cunoscute — posibil legitim
 CE FACI ACUM: Nu ai nevoie de acțiune de protecție. Dacă vrei detalii, accesează aplicația oficială a băncii direct, nu linkuri din email.
 CE NU FACI: Nu introduce date bancare pe pagini la care ajungi din linkuri din email, chiar dacă emailul pare oficial.
-TEMEI JURIDIC: Comunicările comerciale legitime nu cer niciodată date de autentificare prin email (OUG 99/2006, art. 113 alin. (4)).
+TEMEI JURIDIC: Comunicările comerciale legitime nu cer niciodată date de autentificare prin email. Aici nu se aplică un temei legal specific — se aplică principiul general: nicio companie și nicio instituție nu cere date de autentificare printr-un link primit nesolicitat.
 VERIFICĂ OFICIAL LA: Aplicația oficială a băncii tale sau site-ul oficial, accesat direct.
 """
 

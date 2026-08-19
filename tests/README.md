@@ -78,7 +78,7 @@ ignori alertele.
 
 ## Rezultate de referință
 
-Rulare 2026-08-19, prompt ~12.360 tokeni (33.363 caractere), Haiku 4.5
+Rulare 2026-08-19, prompt V4.5 (~12.360 tokeni, 33.363 caractere), Haiku 4.5
 (`rezultate/local-2026-08-19-0722.json`):
 
 - 8/10 scenarii cu scorul așteptat

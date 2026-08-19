@@ -78,24 +78,32 @@ ignori alertele.
 
 ## Rezultate de referință
 
-Rulare 2026-08-19, prompt V4.5 (~12.360 tokeni, 33.363 caractere), Haiku 4.5
-(`rezultate/local-2026-08-19-0722.json`):
+Rulare 2026-08-19, prompt V4.6 (~14.250 tokeni, 38.466 caractere), Haiku 4.5
+(`rezultate/local-2026-08-19-1608.json`):
 
-- 8/10 scenarii cu scorul așteptat
+- 8/10 scenarii cu scorul așteptat — același raport ca înainte de corecțiile
+  juridice din V4.6, deși promptul a crescut cu ~4.500 de caractere
 - fără regresie pe tiparele vechi (01, 02 corecte, cu sfatul specific potrivit)
-- fără fals pozitiv (05 → SCĂZUT), fără alarmism (06 → SCĂZUT)
-- fallback juridic funcțional (07 → zero articole inventate)
+- fără fals pozitiv (05 → SCĂZUT), fără alarmism (06 → MEDIU)
+- fallback juridic funcțional (07 → zero articole inventate, stabil pe 3 rulări)
 - tiparul nou 04b → RIDICAT, cu TEMEI JURIDIC fără niciun articol, cum cere promptul
-- 9 din 10 răspunsuri au toate cele 5 secțiuni obligatorii de format
+- corecțiile V4.6 se văd în ieșire: 02 spune „electronic prin contul de pe
+  spv.anaf.ro în care tu intri singur", fără „doar dacă ai optat"; trimiterile la
+  Codul penal ies cu alineat, „art. 244 alin. (2)"
 - persistent la toate rulările: greșeli de gramatică românească (limită de model)
 
 ### Cele două abateri cunoscute
 
-**03 variază între RIDICAT și CRITIC.** Istoric: RIDICAT de 7 ori, CRITIC de 2 ori
-(inclusiv în rularea de referință din 4 august). Nu e regresie, e nedeterminism —
-vezi regula de interpretare de mai sus. Merită totuși revizuit dacă așteptarea
-`RIDICAT` din `scenarii.json` mai e corectă: criteriul CRITIC (g) din prompt
-descrie literal acest scenariu, deci CRITIC e apărabil.
+**03 variază între RIDICAT și CRITIC.** Istoric: RIDICAT de 7 ori, CRITIC de 5 ori.
+Nu e regresie, e nedeterminism — vezi regula de interpretare de mai sus. Merită
+totuși revizuit dacă așteptarea `RIDICAT` din `scenarii.json` mai e corectă:
+criteriul CRITIC (g) din prompt descrie literal acest scenariu, deci CRITIC e
+apărabil — iar de la 19 august încoace CRITIC e rezultatul dominant.
+
+**01 variază și el, între CRITIC și RIDICAT**, dar CRITIC rămâne dominant
+(4 din 5 la `--repeta 5` pe V4.6, 3 din 5 pe V4.5). Verificat explicit după
+creșterea promptului, fiindcă scenariul 01 există tocmai ca să prindă diluarea
+tiparelor vechi într-un prompt lung. Nu s-a produs.
 
 **08 nu emite deloc formatul.** Scorul iese „—" în *fiecare* rulare completă din
 istoric (4 august, 17 august, 19 august): răspunsul e bun pe fond — refuză să se

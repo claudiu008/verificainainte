@@ -232,7 +232,7 @@ function App() {
             href="/fraude/?utm_source=spa&utm_medium=internal&utm_campaign=index"
             onClick={() => track('fraude_click_index')}
           >
-            Vezi toate cele 15 tipare →
+            Vezi toate cele 16 tipare →
           </a>
         </div>
       )}

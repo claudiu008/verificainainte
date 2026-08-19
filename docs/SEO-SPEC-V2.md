@@ -4,7 +4,7 @@ Continuare a `SEO-SPEC.md`. Aceleași decizii de arhitectură, același template
 13 secțiuni, același CSS. Nu se schimbă nimic din specificația inițială.
 
 Motivul extinderii: `SYSTEM_PROMPT` a ajuns la 19 tipare, iar paginile
-statice acoperă 15 dintre ele. Dintre acestea, 4 tipare nu au încă pagină.
+statice acoperă 16 dintre ele. Dintre acestea, 3 tipare nu au încă pagină.
 
 ---
 

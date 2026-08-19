@@ -22,6 +22,11 @@ Utilizare:
 import json, os, re, sys, pathlib
 from datetime import datetime
 
+# Consola Windows e cp1252 și nu poate tipări „⚠" sau diacriticele — fără asta,
+# scriptul crapă exact când un scenariu iese diferit, adică atunci când contează.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 try:
     from anthropic import Anthropic
 except ImportError:
@@ -38,9 +43,11 @@ AICI = pathlib.Path(__file__).parent
 MAIN = AICI.parent / "verificainainte" / "main.py"
 MODEL = os.environ.get("TEST_MODEL", "claude-haiku-4-5-20251001")
 
-cheie = os.environ.get("dev")
+# „dev" e numele vechi, încă folosit în .env-ul local; ANTHROPIC_API_KEY_DEV e cel documentat.
+cheie = os.environ.get("ANTHROPIC_API_KEY_DEV") or os.environ.get("dev")
 if not cheie:
-    sys.exit("Lipsește ANTHROPIC_API_KEY_DEV. NU folosi cheia de producție pentru teste.")
+    sys.exit("Lipsește ANTHROPIC_API_KEY_DEV (sau dev) în .env. "
+             "NU folosi cheia de producție pentru teste.")
 
 
 def citeste_prompt():

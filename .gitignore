@@ -18,3 +18,6 @@ docs/grafice/grafic.png
 # Build Vite (regenerat la fiecare npm run build)
 frontend/dist/
 
+# Rulări de test (cele 3 de referință din august rămân urmărite, vezi tests/README.md)
+tests/rezultate/
+

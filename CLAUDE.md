@@ -37,7 +37,19 @@ uvicorn main:app --reload         # run dev server (default http://127.0.0.1:800
 ```
 Requires a `.env` file in `verificainainte/` with `ANTHROPIC_API_KEY=...`.
 
-There is no test suite or lint config for the backend, and no CI configuration in the repo.
+There is no lint config for the backend and no CI configuration in the repo. Tests live in `tests/`
+and are plain scripts (no pytest):
+
+```
+python tests/test_citari.py      # unit tests for the citation validator — offline, free
+python tests/citari_replay.py    # replays the validator over every saved real response — offline, free
+python tests/local.py            # 11 prompt regression scenarios via the DEV Anthropic key (costs tokens)
+python tests/ruleaza.py          # same scenarios against the live backend (production key — end-to-end only)
+```
+
+Run the two offline ones after any change to `citari.py` or to the CADRUL JURIDIC section of the prompt;
+they cost nothing. See `tests/README.md` before interpreting `local.py` results — model output is
+non-deterministic and one observation is not a finding.
 
 ## Architecture
 
@@ -55,8 +67,22 @@ Single-file FastAPI app. Key things to know before editing it:
 - `POST /analyze` — the only real endpoint. Rate-limited to 10 requests/minute per IP via `slowapi`
   (`Limiter`/`get_remote_address`). Calls `client.messages.create` with model `claude-haiku-4-5`,
   `max_tokens=1024`, the system prompt above, and the user's raw text as the single user message.
-  Returns `{"rezultat": <model text>}` directly to the frontend — no parsing/validation of the model's
-  output shape.
+  Returns `{"rezultat": <model text>}` to the frontend. The response shape (SCOR / section headers) is
+  still not parsed or validated — the only post-processing is the citation check below.
+- **`citari.py` — deterministic check of legal citations, applied to every `/analyze` response before it
+  is returned.** `CATALOG` is a whitelist derived from the CADRUL JURIDIC section of `SYSTEM_PROMPT`:
+  law → article → the alineat that must accompany it. Known article, complete form → untouched; known
+  article without its mandatory alineat → completed (`art. 244` → `art. 244 alin. (2)`); article that
+  appears in no listed act, or an impossible law/article pair → the reference is stripped from the text.
+  Ambiguous cases (article real but no law named nearby, enumerations) are left alone and only logged;
+  deleting a correct citation is worse than keeping an ambiguous one. Everything is logged to the
+  `citari` logger — eliminations and ambiguities at WARNING.
+  **Any article added to or removed from CADRUL JURIDIC must be mirrored in `CATALOG`**, otherwise a
+  legitimate new citation will be silently stripped from user-facing answers. `DE_REVIZUIT` holds
+  citations that are real but have a history of misuse (art. 113 alin. (4) OUG 99/2006 and the other
+  audit findings) — those are logged, never rewritten, since the misuse is semantic.
+  This is why guard instructions belong in code rather than in the prompt: a whitelist is a guarantee,
+  a prompt line is a request honored probabilistically, and every new guard grows the prompt forever.
 - Every successful `/analyze` call also inserts a row into a `verificari` SQLite table purely as a
   usage counter (no content is stored, just a timestamp). Counting failures are swallowed
   (`except Exception: pass`) so they never break the actual API response.

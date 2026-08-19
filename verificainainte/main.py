@@ -8,9 +8,16 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 import sqlite3
+import logging
 from pathlib import Path
+from citari import verifica_citari, jurnalizeaza
 
 load_dotenv()
+
+# INFO, ca jurnalul citărilor să se vadă în logurile Railway — la ~2 cereri/zi
+# volumul e neglijabil, iar completările și eliminările sunt exact ce trebuie
+# urmărit după fiecare modificare de prompt.
+logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
 # Inițializăm aplicația FastAPI
 app = FastAPI()
@@ -392,6 +399,16 @@ async def analyze(request: Request, situatie: Situatie):
         ]
     )
 
+    # Verificarea citărilor e deterministă și se face aici, nu în prompt: lista
+    # albă din citari.py e o garanție, o instrucțiune „este INTERZIS să citezi…"
+    # e o rugăminte. O eroare aici nu trebuie să lase utilizatorul fără răspuns.
+    raspuns = message.content[0].text
+    try:
+        raspuns, jurnal = verifica_citari(raspuns)
+        jurnalizeaza(jurnal)
+    except Exception:
+        logging.getLogger("citari").exception("verificarea citărilor a eșuat")
+
     try:
         conn = sqlite3.connect(DB_PATH)
         conn.execute("INSERT INTO verificari DEFAULT VALUES")
@@ -400,7 +417,7 @@ async def analyze(request: Request, situatie: Situatie):
     except Exception:
         pass  # o eroare de contorizare nu trebuie să strice răspunsul real
 
-    return {"rezultat": message.content[0].text}
+    return {"rezultat": raspuns}
 
 # Health check
 @app.get("/")

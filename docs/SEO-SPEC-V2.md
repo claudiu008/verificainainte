@@ -48,7 +48,7 @@ După volumul estimat de căutări în română:
 | 4 | `job-fals-sarcini-platite` | generat |
 | 5 | `investitii-deepfake` | generat — vezi avertismentul de la secțiunea 5 |
 | 6 | `escrocherie-sentimentala` | generat |
-| 7 | `abonament-suspendat-plata-esuata` | de generat |
+| 7 | `abonament-suspendat-plata-esuata` | generat |
 
 ---
 

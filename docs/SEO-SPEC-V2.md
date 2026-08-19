@@ -25,14 +25,31 @@ statice acoperă 16 dintre ele. Dintre acestea, 3 tipare nu au încă pagină.
 6. Fără judecată la adresa victimei, în special pe pagina de escrocherie
    sentimentală.
 
-## Sarcini tehnice după generarea paginilor
+## Sarcini tehnice după generarea unei pagini
 
-- adaugă în `frontend/public/sitemap.xml` URL-ul paginii rămase de generat
-- adaugă cardurile în `frontend/public/fraude/index.html`
-- **linkuri reciproce**: fiecare pagină nouă trebuie să primească minimum 2
-  linkuri interne de la alte pagini. Adaugă în secțiunea „Alte fraude active
-  acum" de pe paginile vechi indicate la fiecare intrare de mai jos.
-- commit-uri separate: pagini / fișiere tehnice
+Se execută la **fiecare** pagină nouă, nu doar la cele 7 din acest fișier. Pentru
+cele 7, toți pașii sunt făcuți — lista rămâne aici ca procedură pentru următoarea.
+
+1. `frontend/public/sitemap.xml` — o intrare nouă, cu `lastmod` la data adăugării.
+   Fișierul are doar `<loc>` și `<lastmod>`, fără `changefreq` sau `priority`.
+2. `frontend/public/fraude/index.html` — un card nou, ultimul din `.tipar-grid`.
+   Convenția e nume scurt de tipar în `<strong>` (3-5 cuvinte, nu întrebare) și o
+   singură propoziție în `<span>`.
+3. `frontend/src/App.jsx` — contorul „Vezi toate cele N tipare" de la linkul spre
+   `/fraude/`. **Se uită ușor**, iar dacă rămâne în urmă, SPA-ul promite mai puțin
+   decât livrează pagina index.
+4. **Linkuri reciproce**: fiecare pagină nouă primește minimum 2 linkuri interne de
+   la alte pagini. Se adaugă în secțiunea „Alte fraude active acum" de pe paginile
+   vechi indicate la fiecare intrare de mai jos, înainte de rândul spre `/fraude/`.
+   Pagina nouă trimite înapoi către aceleași pagini.
+5. Tabelul „Ordinea de lucru" de mai jos — statusul rândului trece pe „generat".
+6. Contorul din intro-ul acestui fișier — câte tipare sunt acoperite și câte nu.
+
+Commit-uri separate: pagini / fișiere tehnice.
+
+După deploy, pașii manuali din `SEO-SPEC.md` secțiunea 7 (Google Search Console:
+retrimiterea sitemap-ului și „Request indexing" pentru URL-ul nou) rămân în sarcina
+lui Claudiu — nu se fac din cod.
 
 ---
 

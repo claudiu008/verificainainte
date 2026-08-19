@@ -7,12 +7,19 @@ respectată probabilistic de un model mic, iar fiecare gardă negativă adăugat
 („este INTERZIS să citezi art. X pentru…") crește promptul definitiv și nu iese
 niciodată. Lista de mai jos e o garanție, costă zero tokeni și zero apeluri.
 
-Trei acțiuni, în ordinea încrederii:
+Patru acțiuni, în ordinea încrederii:
   - articol cunoscut, formă completă              -> trece neatins
   - articol cunoscut, fără alineatul obligatoriu  -> se completează
                                                      („art. 244" -> „art. 244 alin. (2)")
+  - articol cunoscut, cu alt alineat decât cel din CADRUL JURIDIC
+    („art. 244 alin. (1)")                        -> se corectează la forma din prompt
   - număr care nu apare în niciun act din catalog, sau pereche lege/articol
     imposibilă („art. 5 din Legea 207/2015")      -> trimiterea se elimină din text
+
+Corectarea alineatului se aplică DOAR articolelor pentru care catalogul dă un
+alineat unic — adică acelea pe care promptul le descrie cu un singur alineat.
+Unde promptul citează mai multe (art. 47 Legea 207/2015, art. 49 Legea 129/2019),
+valoarea din catalog e None și orice alineat scris rămâne neatins.
 
 Ce NU face: nu judecă dacă articolul e potrivit pentru afirmația din propoziție.
 Aia rămâne treaba promptului (ex: art. 113 OUG 99/2006 se adresează angajaților
@@ -29,9 +36,11 @@ log = logging.getLogger("citari")
 # ── Catalogul de articole permise ───────────────────────────────────────────
 # Sursa e secțiunea CADRUL JURIDIC din SYSTEM_PROMPT (main.py). Orice articol
 # adăugat acolo trebuie adăugat și aici, altfel citarea lui va fi eliminată.
-# Valoarea = alineatul obligatoriu, cel care se completează automat când modelul
-# scrie articolul gol. None = promptul descrie articolul cu mai multe alineate,
-# deci forma scurtă e legitimă și nu se completează nimic.
+# Valoarea = alineatul obligatoriu: se completează când modelul scrie articolul
+# gol și se corectează când modelul scrie alt alineat. Pune aici o valoare DOAR
+# dacă promptul citează articolul cu un singur alineat — altfel corectarea ar
+# rescrie o trimitere corectă. None = mai multe alineate în prompt, deci forma
+# scurtă e legitimă și orice alineat scris rămâne neatins.
 CATALOG = {
     "Legea 207/2015": {"11": "alin. (1)", "46": None, "47": None, "48": "alin. (2)"},
     "Legea 312/2004": {"2": None, "21": "alin. (1)", "51": "alin. (2)", "52": None,
@@ -50,7 +59,10 @@ CATALOG = {
                        "49": None, "50": None},
 }
 
-# Citări reale, dar cu istoric de folosire greșită — se notează, nu se modifică.
+# Citări reale, dar cu istoric de folosire greșită. Pentru articolele cu alineat
+# unic în catalog (art. 27 OG 2/2001) textul de aici explică de ce s-a corectat;
+# pentru celelalte (art. 113 OUG 99/2006, art. 3 OUG 93/2012) rămâne o simplă
+# notă în jurnal — misuse-ul e semantic, iar verificatorul nu judecă semantica.
 # Fiecare intrare vine dintr-o constatare a auditului juridic.
 DE_REVIZUIT = {
     ("OUG 99/2006", "113", "alin. (4)"):
@@ -214,32 +226,46 @@ def verifica_citari(text):
                 continue
 
         cerut = CATALOG[lege][nr]
-        if cerut and not detaliu:
-            if ENUMERARE.match(text, m.end()):
-                jurnal.append({
-                    "actiune": "ambiguu", "citare": citare,
-                    "motiv": f"art. {nr} apare într-o enumerare de articole — "
-                             "alineatul nu se completează automat",
-                })
-                continue
-            modificari.append((m.start(), m.end(), f"art. {nr} {cerut}"))
+        scris = _formateaza(detaliu) if detaliu else ""
+
+        if not scris and not cerut:
+            continue  # promptul descrie articolul cu mai multe alineate
+        if not scris and ENUMERARE.match(text, m.end()):
             jurnal.append({
-                "actiune": "completat", "citare": citare,
-                "motiv": f"art. {nr} -> art. {nr} {cerut} ({lege})",
+                "actiune": "ambiguu", "citare": citare,
+                "motiv": f"art. {nr} apare într-o enumerare de articole — "
+                         "alineatul nu se completează automat",
             })
             continue
 
-        if detaliu:
-            formatat = _formateaza(detaliu)
-            if formatat != detaliu:
-                modificari.append((m.start(), m.end(), f"art. {nr} {formatat}"))
-                jurnal.append({
-                    "actiune": "normalizat", "citare": citare,
-                    "motiv": f"{citare} -> art. {nr} {formatat}",
-                })
-                detaliu = formatat
+        final, actiune, motiv = scris, None, ""
+        if not scris:
+            final, actiune = cerut, "completat"
+            motiv = f"art. {nr} -> art. {nr} {cerut} ({lege})"
+        elif cerut and scris != cerut and not scris.startswith(cerut):
+            final = cerut
+            if cerut.startswith(scris):
+                # „art. 31 alin. (1)" când catalogul cere „alin. (1) lit. c)":
+                # nu e greșit, e incomplet — se duce până la forma din prompt
+                actiune = "precizat"
+                motiv = f"art. {nr} {scris} -> art. {nr} {cerut} ({lege})"
+            else:
+                # alineat scris explicit, dar altul decât cel din CADRUL JURIDIC
+                actiune = "corectat"
+                motiv = (f"art. {nr} {scris} -> art. {nr} {cerut}: "
+                         + (DE_REVIZUIT.get((lege, nr, scris))
+                            or f"în {lege}, CADRUL JURIDIC citează art. {nr} {cerut}"))
+        elif scris != detaliu:
+            actiune = "normalizat"
+            motiv = f"{citare} -> art. {nr} {scris}"
 
-        avertisment = DE_REVIZUIT.get((lege, nr, detaliu))
+        if actiune:
+            # „Art." la început de frază rămâne cu majusculă
+            prefix = re.sub(r"\s+", " ", text[m.start():m.start("nr")])
+            modificari.append((m.start(), m.end(), f"{prefix}{nr} {final}"))
+            jurnal.append({"actiune": actiune, "citare": citare, "motiv": motiv})
+
+        avertisment = DE_REVIZUIT.get((lege, nr, final))
         if avertisment:
             jurnal.append({"actiune": "de_revizuit", "citare": citare,
                            "motiv": avertisment})
@@ -260,5 +286,6 @@ def verifica_citari(text):
 def jurnalizeaza(jurnal):
     """Scrie în log doar ce merită privit — un articol inventat sau eliminat."""
     for nota in jurnal:
-        nivel = log.warning if nota["actiune"] in ("eliminat", "ambiguu") else log.info
+        nivel = (log.warning if nota["actiune"] in ("eliminat", "ambiguu", "corectat")
+                 else log.info)
         nivel("citare %s: %s (%s)", nota["actiune"], nota["citare"], nota["motiv"])

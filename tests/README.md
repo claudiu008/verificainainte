@@ -73,7 +73,8 @@ modificare a catalogului din `verificainainte/citari.py` sau a secțiunii CADRUL
 JURIDIC din prompt, nu doar când „pare necesar".
 
 Împart munca așa: `test_citari.py` verifică ce m-am gândit eu să verific
-(alineat completat, articol inventat eliminat, citare corectă lăsată în pace),
+(alineat completat, alineat greșit corectat, articol inventat eliminat, citare
+corectă lăsată în pace),
 iar `citari_replay.py` trece verificatorul peste ieșiri pe care modelul le-a
 produs efectiv, de-a lungul mai multor versiuni de prompt. Al doilea prinde exact
 ce ratează primul: forme de scriere la care nu m-am gândit („alin. 2" fără
@@ -84,11 +85,17 @@ merită privit**. O eliminare corectă înseamnă un articol inventat de model; 
 greșită înseamnă un articol lipsă din `CATALOG` — adică verificatorul e pe cale să
 șteargă temeiuri juridice bune din răspunsurile reale.
 
-Rulare de referință (19 august 2026, după introducerea verificatorului): 133 de
-răspunsuri reale din 22 de rulări — 124 neatinse, 9 modificate, toate în direcția
-bună (5 alineate completate, 4 normalizări de paranteze), **zero eliminări**.
-Ultima cifră confirmă pe date ce spunea și auditul: modelul nu inventă articole,
-dar scrie „art. 244" în loc de „art. 244 alin. (2)".
+Rulare de referință (19 august 2026, după extinderea verificatorului cu
+corectarea alineatului greșit): 156 de răspunsuri reale din 24 de rulări — 145
+neatinse, 11 modificate, toate în direcția bună (6 alineate completate, 6
+normalizări de paranteze), **zero eliminări**. Ultima cifră confirmă pe date ce
+spunea și auditul: modelul nu inventă articole, dar scrie „art. 244" în loc de
+„art. 244 alin. (2)".
+
+Tot zero sunt și `corectat` și `precizat`: în tot istoricul salvat modelul n-a
+scris niciodată un alineat greșit. Acțiunea există pentru că garda din prompt care
+descuraja asta a fost tăiată (V4.8), nu pentru că defectul s-ar fi văzut — deci
+deocamdată e acoperită doar de cazurile scrise de mână din `test_citari.py`.
 
 ## Reguli de interpretare
 

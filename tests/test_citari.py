@@ -108,6 +108,44 @@ CAZURI = [
         None,
         [],
     ),
+    (
+        "corectează alineatul greșit — alin. (1) e forma de bază, nu calitatea mincinoasă",
+        "A pretinde calitatea de polițist se pedepsește ca înșelăciune "
+        "(art. 244 alin. (1) Cod Penal).",
+        "A pretinde calitatea de polițist se pedepsește ca înșelăciune "
+        "(art. 244 alin. (2) Cod Penal).",
+        ["corectat"],
+    ),
+    (
+        "alineat greșit ȘI fără paranteze — o singură modificare, forma din prompt",
+        "Fapta e înșelăciune (art. 244 alin. 1 Cod penal).",
+        "Fapta e înșelăciune (art. 244 alin. (2) Cod penal).",
+        ["corectat"],
+    ),
+    (
+        "corectează art. 27 OG 2/2001 la alin. (1) — alin. (2) e martorul la afișare",
+        "Amenda se comunică prin poștă (art. 27 alin. (2) din OG 2/2001).",
+        "Amenda se comunică prin poștă (art. 27 alin. (1) din OG 2/2001).",
+        ["corectat"],
+    ),
+    (
+        "alineat incomplet față de catalog — se duce până la litera din prompt",
+        "Invitarea se face în scris (art. 31 alin. (1) din Legea 218/2002).",
+        "Invitarea se face în scris (art. 31 alin. (1) lit. c) din Legea 218/2002).",
+        ["precizat"],
+    ),
+    (
+        "art. 47 Legea 207/2015 — catalogul nu impune un alineat, deci nu se corectează",
+        "Actul se comunică electronic (art. 47 alin. (16) din Legea 207/2015).",
+        None,
+        [],
+    ),
+    (
+        "un alineat mai precis decât catalogul rămâne neatins — nu se taie precizia",
+        "Banca nu îți spune că a raportat (art. 38 alin. (2) lit. b) din Legea 129/2019).",
+        None,
+        [],
+    ),
 ]
 
 

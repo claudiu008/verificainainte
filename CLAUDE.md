@@ -72,15 +72,24 @@ Single-file FastAPI app. Key things to know before editing it:
 - **`citari.py` — deterministic check of legal citations, applied to every `/analyze` response before it
   is returned.** `CATALOG` is a whitelist derived from the CADRUL JURIDIC section of `SYSTEM_PROMPT`:
   law → article → the alineat that must accompany it. Known article, complete form → untouched; known
-  article without its mandatory alineat → completed (`art. 244` → `art. 244 alin. (2)`); article that
-  appears in no listed act, or an impossible law/article pair → the reference is stripped from the text.
+  article without its mandatory alineat → completed (`art. 244` → `art. 244 alin. (2)`); known article
+  carrying a *different* alineat than the catalog's → corrected to the catalog form (`art. 244 alin. (1)`
+  → `art. 244 alin. (2)`), and one that is merely less specific → extended (`art. 31 alin. (1)` →
+  `art. 31 alin. (1) lit. c)`); article that appears in no listed act, or an impossible law/article
+  pair → the reference is stripped from the text.
+  A catalog entry may name an alineat **only** when the prompt cites that article with a single alineat —
+  otherwise use `None` (as for `art. 47` Legea 207/2015), or the correction would rewrite valid citations.
+  An alineat *more* precise than the catalog's (`art. 38 alin. (2) lit. b)`) is left alone: the check
+  never removes precision.
   Ambiguous cases (article real but no law named nearby, enumerations) are left alone and only logged;
   deleting a correct citation is worse than keeping an ambiguous one. Everything is logged to the
-  `citari` logger — eliminations and ambiguities at WARNING.
+  `citari` logger — eliminations, ambiguities and alineat corrections at WARNING.
   **Any article added to or removed from CADRUL JURIDIC must be mirrored in `CATALOG`**, otherwise a
   legitimate new citation will be silently stripped from user-facing answers. `DE_REVIZUIT` holds
   citations that are real but have a history of misuse (art. 113 alin. (4) OUG 99/2006 and the other
-  audit findings) — those are logged, never rewritten, since the misuse is semantic.
+  audit findings). Where the article has no single mandatory alineat these are only logged, never
+  rewritten, since the misuse is semantic; where it does (art. 27 OG 2/2001), the entry supplies the
+  reason printed with the correction.
   This is why guard instructions belong in code rather than in the prompt: a whitelist is a guarantee,
   a prompt line is a request honored probabilistically, and every new guard grows the prompt forever.
 - Every successful `/analyze` call also inserts a row into a `verificari` SQLite table purely as a

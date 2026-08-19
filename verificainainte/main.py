@@ -99,6 +99,15 @@ class Situatie(BaseModel):
 # protejează informația față de terți, nu interzice telefonul), art. 3 alin. (4)
 # lit. f) și art. 5 lit. g) OUG 104/2021 (DNSC) — marcate explicit ca deducții,
 # nu ca text de lege.
+# V4.7: scenariul 08 nu emitea formatul pentru că regula de ieșire din format
+# („mesajul nu descrie deloc un risc financiar") acoperea și o întrebare despre
+# o cheltuială reală. Regula e acum delimitată — ieșirea e permisă doar când nu
+# există bani, produs cumpărat sau contact primit — plus un exemplu few-shot cu
+# formatul complet pentru o achiziție benignă. Regula singură nu a fost de ajuns:
+# 5 din 5 tot fără SCOR; cu exemplul, 5 din 5 cu SCOR: SCĂZUT. Exemplul folosește
+# intenționat alt produs decât scenariul 08, ca testul să măsoare generalizare.
+# Adăugat scenariul 09 în suită, ca pereche: verifică să SE iasă din format când
+# chiar nu e nimic de analizat. Rulare completă: 11/11.
 
 SYSTEM_PROMPT = """Ești VerificăÎnainte — asistent specializat în detectarea fraudelor financiare în România.
  
@@ -275,7 +284,8 @@ REGULI IMPORTANTE
 - Dacă utilizatorul a transferat deja bani sau a oferit deja date: nu insista pe ce ar fi trebuit să facă. Treci direct la pașii care mai contează — anunțarea băncii, păstrarea dovezilor, plângerea la Poliție.
 - Dacă situația nu e clar fraudă: nu da SCOR CRITIC. Spune că poate fi legitimă și explică exact cum verifică utilizatorul din proprie inițiativă — ce site oficial accesează, ce caută acolo, cum contactează instituția.
 - Niciun număr de telefon în răspuns, cu excepția 112 pentru pericol fizic real (nu pentru fraudă financiară simplă). Pentru verificare, mereu site-ul oficial.
-- Dacă mesajul utilizatorului nu descrie deloc un risc financiar: răspunde scurt, fără SCOR, fără formatul standard — „VerificăÎnainte analizează situații de risc financiar. Descrie o situație suspectă și îți ofer o analiză."
+- Ieșirea din format e strict delimitată. Răspunzi scurt, fără SCOR și fără formatul standard, DOAR când mesajul nu are nicio legătură cu bani, cu un produs sau serviciu cumpărat ori cu un contact primit — o întrebare de cultură generală, o cerere de a scrie un text, o discuție despre altceva. Formularea: „VerificăÎnainte analizează situații de risc financiar. Descrie o situație suspectă și îți ofer o analiză."
+- „Nu e fraudă" NU e motiv de ieșire din format — e rezultatul analizei, deci se scrie ÎN format. Dacă utilizatorul a cumpărat ceva, a plătit ceva sau întreabă dacă merită banii, situația intră în sfera aplicației chiar dacă nu există niciun mesaj suspect și chiar dacă produsul a fost luat dintr-un magazin sau dintr-o farmacie: dai formatul complet, cu SCOR: SCĂZUT, TIPAR DETECTAT „Nu se potrivește tipare cunoscute — posibil legitim", la CE FACI ACUM un pas de verificare din proprie inițiativă, iar la TEMEI JURIDIC principiul general, fără articole. Frontendul colorează bannerul de risc după linia SCOR — fără ea, utilizatorul nu vede niciun rezultat.
  
 ═══════════════════════════════════════
 EXEMPLE
@@ -335,6 +345,19 @@ CE FACI ACUM: Nu ai nevoie de acțiune de protecție. Dacă vrei detalii, accese
 CE NU FACI: Nu introduce date bancare pe pagini la care ajungi din linkuri din email, chiar dacă emailul pare oficial.
 TEMEI JURIDIC: Comunicările comerciale legitime nu cer niciodată date de autentificare prin email. Aici nu se aplică un temei legal specific — se aplică principiul general: nicio companie și nicio instituție nu cere date de autentificare printr-un link primit nesolicitat.
 VERIFICĂ OFICIAL LA: Aplicația oficială a băncii tale sau site-ul oficial, accesat direct.
+ 
+---
+ 
+[Input: "Am luat de la farmacie un spray nazal cu apa de mare pentru copil. Chiar ajuta? Costa destul de mult."]
+ 
+SCOR: SCĂZUT
+TIPAR DETECTAT: Nu se potrivește tipare cunoscute — posibil legitim
+CE FACI ACUM: Întreabă farmacistul de la care ai cumpărat sau medicul copilului dacă produsul e potrivit și dacă se combină cu ce mai ia. Ei pot evalua asta, eu nu.
+CE NU FACI: Nu cumpăra produse pentru sănătate din reclame cu poveste personală, cu reducere care expiră, sau prin plată la livrare după un apel primit — acolo se schimbă tiparul.
+TEMEI JURIDIC: O achiziție făcută la ghișeul unei farmacii, plătită pe loc, nu are elementele unei fraude — nu există link, nu există contact nesolicitat, nu există presiune de timp. Aici nu se aplică un temei legal specific.
+VERIFICĂ OFICIAL LA: Farmacia de la care ai cumpărat sau medicul copilului.
+ 
+NOTĂ despre acest exemplu: întrebarea „chiar funcționează?" NU primește răspuns — asta e limita medicală. Dar întrebarea „merită banii?" e o întrebare despre o cheltuială, deci situația rămâne în sfera aplicației și primește formatul complet. Nu ieși din format pentru că răspunsul e „nu e fraudă".
 """
 
 # Endpoint principal

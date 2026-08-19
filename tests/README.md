@@ -12,7 +12,7 @@ Se numește **regresie**: ceva care funcționa se strică fără să fi atins ac
 Antidotul e un set fix de scenarii, rulate identic de fiecare dată. Contează mai
 puțin rezultatul absolut, mai mult **diferența față de rularea anterioară**.
 
-## Ce testează cele 10 scenarii
+## Ce testează cele 11 scenarii
 
 | ID | Ce verifică | Scor așteptat |
 |----|-------------|---------------|
@@ -25,7 +25,8 @@ puțin rezultatul absolut, mai mult **diferența față de rularea anterioară**
 | 05 | **fals pozitiv** — mesaj legitim; CRITIC aici = model stricat | SCĂZUT |
 | 06 | **nuanță** — situație ambiguă; nu trebuie CRITIC | MEDIU sau SCĂZUT |
 | 07 | **fallback juridic** — instituție din afara cadrului; fără articole inventate | CRITIC sau RIDICAT |
-| 08 | **limita medicală** izolată — nu se pronunță pe eficacitate | SCĂZUT |
+| 08 | **limita medicală** izolată — nu se pronunță pe eficacitate, dar rămâne în format | SCĂZUT |
+| 09 | **ieșirea din format** — mesaj chiar în afara sferei; perechea lui 08 | — (fără SCOR) |
 
 Scenariul 05 e cel mai ușor de uitat și cel mai important. Un model care vede
 fraudă peste tot e la fel de inutil ca unul care nu vede niciuna — doar că eșecul
@@ -78,36 +79,60 @@ ignori alertele.
 
 ## Rezultate de referință
 
-Rulare 2026-08-19, prompt V4.6 (~14.250 tokeni, 38.466 caractere), Haiku 4.5
-(`rezultate/local-2026-08-19-1608.json`):
+Rulare 2026-08-19, prompt V4.7 (~15.000 tokeni, 40.466 caractere), Haiku 4.5
+(`rezultate/local-2026-08-19-1827.json`):
 
-- 8/10 scenarii cu scorul așteptat — același raport ca înainte de corecțiile
-  juridice din V4.6, deși promptul a crescut cu ~4.500 de caractere
-- fără regresie pe tiparele vechi (01, 02 corecte, cu sfatul specific potrivit)
+- **11/11 scenarii cu scorul așteptat** — prima rulare completă fără nicio abatere
+- fără regresie pe tiparele vechi (01, 02 corecte, cu sfatul specific potrivit),
+  deși promptul a crescut cu ~6.500 de caractere față de V4.5
 - fără fals pozitiv (05 → SCĂZUT), fără alarmism (06 → MEDIU)
 - fallback juridic funcțional (07 → zero articole inventate, stabil pe 3 rulări)
-- tiparul nou 04b → RIDICAT, cu TEMEI JURIDIC fără niciun articol, cum cere promptul
-- corecțiile V4.6 se văd în ieșire: 02 spune „electronic prin contul de pe
+- 08 emite acum formatul complet cu SCOR: SCĂZUT, stabil 5 din 5, păstrând
+  limita medicală — vezi mai jos
+- 09 confirmă că ieșirea din format încă funcționează unde trebuie, stabil 3 din 3
+- corecțiile juridice se văd în ieșire: 02 spune „electronic prin contul de pe
   spv.anaf.ro în care tu intri singur", fără „doar dacă ai optat"; trimiterile la
   Codul penal ies cu alineat, „art. 244 alin. (2)"
 - persistent la toate rulările: greșeli de gramatică românească (limită de model)
 
-### Cele două abateri cunoscute
+### Abaterea rămasă
 
-**03 variază între RIDICAT și CRITIC.** Istoric: RIDICAT de 7 ori, CRITIC de 5 ori.
+**03 variază între RIDICAT și CRITIC.** Istoric: RIDICAT de 8 ori, CRITIC de 5 ori.
 Nu e regresie, e nedeterminism — vezi regula de interpretare de mai sus. Merită
 totuși revizuit dacă așteptarea `RIDICAT` din `scenarii.json` mai e corectă:
 criteriul CRITIC (g) din prompt descrie literal acest scenariu, deci CRITIC e
-apărabil — iar de la 19 august încoace CRITIC e rezultatul dominant.
+apărabil.
 
 **01 variază și el, între CRITIC și RIDICAT**, dar CRITIC rămâne dominant
 (4 din 5 la `--repeta 5` pe V4.6, 3 din 5 pe V4.5). Verificat explicit după
 creșterea promptului, fiindcă scenariul 01 există tocmai ca să prindă diluarea
 tiparelor vechi într-un prompt lung. Nu s-a produs.
 
-**08 nu emite deloc formatul.** Scorul iese „—" în *fiecare* rulare completă din
-istoric (4 august, 17 august, 19 august): răspunsul e bun pe fond — refuză să se
-pronunțe pe eficacitate și trimite la medic sau farmacist — dar nu conține niciuna
-dintre cele 5 secțiuni, deci nici linia `SCOR:`. Consecința e în frontend:
-`detecteazaScor()` din `App.jsx` caută eticheta în text, deci pentru astfel de
-întrebări bannerul de risc nu se colorează. Se repară din `SYSTEM_PROMPT`, nu din test.
+### 08 — ce era și cum s-a reparat (V4.7)
+
+Scorul ieșea „—" în *fiecare* rulare completă din istoric (4, 17 și 19 august):
+răspunsul era bun pe fond, dar fără linia `SCOR:`, deci `detecteazaScor()` din
+`App.jsx` nu colora bannerul de risc.
+
+Cauza nu era neascultare a modelului, ci o regulă din prompt: „dacă mesajul nu
+descrie deloc un risc financiar, răspunde fără SCOR și fără formatul standard".
+Modelul citea „am cumpărat un supliment, chiar funcționează?" ca fiind în afara
+sferei și ieșea corect din format, conform instrucțiunii.
+
+Reparat în două mișcări, fiindcă prima singură nu a fost suficientă — regula
+rescrisă (ieșirea din format e permisă doar când nu există bani, produs sau
+contact primit; „nu e fraudă" e rezultat al analizei, nu motiv să nu o faci) a
+lăsat modelul tot pe „—" în 5 din 5. Abia adăugarea unui exemplu few-shot cu
+formatul complet pentru o achiziție benignă din farmacie a mutat rezultatul, la
+5 din 5 SCĂZUT.
+
+**Exemplul din prompt folosește intenționat alt produs decât scenariul 08** (spray
+nazal, nu colagen). Prima variantă reproducea textul scenariului cuvânt cu cuvânt,
+ceea ce ar fi făcut testul să se valideze singur. Cu inputuri diferite, 08
+măsoară generalizare, nu memorare.
+
+Scenariul **09 e perechea lui 08** și a fost adăugat odată cu reparația: 08
+verifică să NU se iasă din format când e vorba de o cheltuială, 09 verifică să SE
+iasă când chiar nu e nimic de analizat. Fără 09, îngustarea regulii ar fi putut
+transforma orice întrebare off-topic într-o analiză de risc, iar suita nu ar fi
+prins-o.

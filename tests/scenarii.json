@@ -80,6 +80,14 @@
       "asteptat_scor": "SCĂZUT",
       "asteptat_tipar": "nu e fraudă",
       "verifica": "NU trebuie să se pronunțe dacă funcționează. Trebuie să trimită la medic sau farmacist."
+    },
+    {
+      "id": "09-in-afara-sferei",
+      "scop": "Păzește ieșirea din format. Mesaj fără nicio legătură cu bani, produse sau contacte primite. Perechea lui 08: 08 verifică să NU se iasă din format când e vorba de o cheltuială, 09 verifică să SE iasă când chiar nu e nimic de analizat.",
+      "text": "Buna! Poti sa imi spui care e cel mai bun moment din an ca sa plantez trandafiri?",
+      "asteptat_scor": "—",
+      "asteptat_tipar": "—",
+      "verifica": "NU trebuie să emită SCOR și nici formatul cu 6 secțiuni. Trebuie să răspundă scurt că VerificăÎnainte analizează situații de risc financiar și să invite la descrierea unei situații suspecte. NU trebuie să inventeze un risc ca să pară util."
     }
   ]
 }

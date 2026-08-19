@@ -11,6 +11,7 @@ import sqlite3
 import logging
 from pathlib import Path
 from citari import verifica_citari, jurnalizeaza
+from scor import extrage_scor
 
 load_dotenv()
 
@@ -50,14 +51,20 @@ DB_PATH = Path("/data/stats.db") if Path("/data").exists() else Path("stats.db")
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     conn.execute("CREATE TABLE IF NOT EXISTS verificari (id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT DEFAULT CURRENT_TIMESTAMP)")
-    # Câte alineate a corectat verificatorul în răspunsul respectiv. Un alineat
-    # scris greșit e singurul semn că modelul argumenta alt lucru decât temeiul
-    # pe care îl citează, iar rescrierea îl face să arate corect — deci numărul
-    # trebuie să fie vizibil, nu doar un WARNING într-un log pe care nu-l citește
-    # nimeni. Coloana se adaugă la baza existentă de pe volumul Railway.
+    # Două defecte care nu se văd în răspunsul livrat, deci trebuie numărate:
+    #   corectari — câte alineate a rescris verificatorul de citări. Un alineat
+    #     greșit e singurul semn că modelul argumenta alt lucru decât temeiul pe
+    #     care îl citează, iar rescrierea îl face să arate corect.
+    #   fara_scor — răspunsul n-a conținut linia „SCOR:", deci bannerul de risc
+    #     din frontend rămâne necolorat. Uneori e corect (mesaj în afara sferei),
+    #     dar o creștere după o modificare de prompt înseamnă că regula de ieșire
+    #     din format s-a lărgit — exact defectul scenariului 08, care a trăit
+    #     nedetectat prin trei rulări complete de teste.
+    # Coloanele se adaugă la baza existentă de pe volumul Railway.
     coloane = [c[1] for c in conn.execute("PRAGMA table_info(verificari)")]
-    if "corectari" not in coloane:
-        conn.execute("ALTER TABLE verificari ADD COLUMN corectari INTEGER DEFAULT 0")
+    for coloana in ("corectari", "fara_scor"):
+        if coloana not in coloane:
+            conn.execute(f"ALTER TABLE verificari ADD COLUMN {coloana} INTEGER DEFAULT 0")
     conn.commit()
     conn.close()
 
@@ -430,9 +437,17 @@ async def analyze(request: Request, situatie: Situatie):
 
     corectari = sum(1 for nota in jurnal if nota["actiune"] == "corectat")
 
+    # Formatul nu se repară aici: absența scorului e uneori corectă (promptul
+    # permite ieșirea din format), deci se numără, nu se rescrie.
+    fara_scor = extrage_scor(raspuns) is None
+    if fara_scor:
+        logging.getLogger("scor").warning(
+            "răspuns fără linia SCOR: — bannerul de risc rămâne necolorat")
+
     try:
         conn = sqlite3.connect(DB_PATH)
-        conn.execute("INSERT INTO verificari (corectari) VALUES (?)", (corectari,))
+        conn.execute("INSERT INTO verificari (corectari, fara_scor) VALUES (?, ?)",
+                     (corectari, int(fara_scor)))
         conn.commit()
         conn.close()
     except Exception:
@@ -450,10 +465,16 @@ async def stats():
     conn = sqlite3.connect(DB_PATH)
     total = conn.execute("SELECT COUNT(*) FROM verificari").fetchone()[0]
     azi = conn.execute("SELECT COUNT(*) FROM verificari WHERE date(timestamp) = date('now')").fetchone()[0]
-    # COALESCE: rândurile de dinaintea coloanei au corectari NULL, iar SUM pe
-    # tabelă goală întoarce tot NULL
-    corectari = conn.execute("SELECT COALESCE(SUM(corectari), 0) FROM verificari").fetchone()[0]
-    corectari_azi = conn.execute("SELECT COALESCE(SUM(corectari), 0) FROM verificari WHERE date(timestamp) = date('now')").fetchone()[0]
+    # COALESCE: rândurile de dinaintea coloanei au valoarea NULL, iar SUM pe o
+    # tabelă goală întoarce tot NULL — ambele trebuie citite ca 0
+    def suma(coloana, doar_azi=False):
+        unde = " WHERE date(timestamp) = date('now')" if doar_azi else ""
+        return conn.execute(
+            f"SELECT COALESCE(SUM({coloana}), 0) FROM verificari{unde}").fetchone()[0]
+
+    corectari, corectari_azi = suma("corectari"), suma("corectari", True)
+    fara_scor, fara_scor_azi = suma("fara_scor"), suma("fara_scor", True)
     conn.close()
     return {"total": total, "azi": azi,
-            "corectari": corectari, "corectari_azi": corectari_azi}
+            "corectari": corectari, "corectari_azi": corectari_azi,
+            "fara_scor": fara_scor, "fara_scor_azi": fara_scor_azi}

@@ -61,24 +61,32 @@ complet funcționează (rețea + backend + prompt), nu pentru teste de prompt.
 Fiecare rulare consumă din cheia de producție și adaugă 8 înregistrări false în
 statistici.
 
-### `test_citari.py` și `citari_replay.py` — verificatorul de citări, offline
+### `test_citari.py`, `citari_replay.py` și `test_scor.py` — verificările din cod, offline
 
 ```bash
-python tests/test_citari.py       # 14 cazuri scrise de mână
+python tests/test_citari.py       # cazuri scrise de mână pentru verificatorul de citări
 python tests/citari_replay.py     # verificatorul peste toate răspunsurile reale salvate
+python tests/test_scor.py         # citirea liniei SCOR: + câte răspunsuri reale n-au avut una
 ```
 
-Amândouă rulează fără rețea, fără cheie și fără cost — deci se rulează la fiecare
-modificare a catalogului din `verificainainte/citari.py` sau a secțiunii CADRUL
-JURIDIC din prompt, nu doar când „pare necesar".
+Toate trei rulează fără rețea, fără cheie și fără cost — deci se rulează la fiecare
+modificare a catalogului din `verificainainte/citari.py`, a secțiunii CADRUL
+JURIDIC din prompt sau a regulilor de format ale răspunsului, nu doar când „pare
+necesar".
 
-Împart munca așa: `test_citari.py` verifică ce m-am gândit eu să verific
-(alineat completat, alineat greșit corectat, articol inventat eliminat, citare
-corectă lăsată în pace),
-iar `citari_replay.py` trece verificatorul peste ieșiri pe care modelul le-a
-produs efectiv, de-a lungul mai multor versiuni de prompt. Al doilea prinde exact
-ce ratează primul: forme de scriere la care nu m-am gândit („alin. 2" fără
-paranteze, „art. 6, 38" ca enumerare).
+Împart munca așa: `test_citari.py` verifică ce m-am gândit eu să verific (alineat
+completat, alineat greșit corectat, articol inventat eliminat, citare corectă
+lăsată în pace), iar `citari_replay.py` trece verificatorul peste ieșiri pe care
+modelul le-a produs efectiv, de-a lungul mai multor versiuni de prompt. Al doilea
+prinde exact ce ratează primul: forme de scriere la care nu m-am gândit („alin. 2"
+fără paranteze, „art. 6, 38" ca enumerare).
+
+`test_scor.py` le face pe amândouă într-un fișier, fiindcă e o singură funcție:
+cazuri scrise de mână pentru formele de markdown în care modelul împachetează
+linia `SCOR:`, apoi aceeași funcție peste toate răspunsurile salvate. A doua
+cifră e informativă, nu un prag — la ultima rulare, 20 de răspunsuri din 156 n-au
+avut scor: 13 sunt scenariul 08 dinainte de V4.7 (defect, reparat), 7 sunt
+scenariul 09, care iese din format prin definiție.
 
 Ce trebuie citit în raportul de replay: **orice `eliminat` pe un răspuns istoric
 merită privit**. O eliminare corectă înseamnă un articol inventat de model; una

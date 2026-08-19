@@ -43,12 +43,13 @@ and are plain scripts (no pytest):
 ```
 python tests/test_citari.py      # unit tests for the citation validator — offline, free
 python tests/citari_replay.py    # replays the validator over every saved real response — offline, free
+python tests/test_scor.py        # unit tests for the SCOR-line reader + a replay over saved responses
 python tests/local.py            # 11 prompt regression scenarios via the DEV Anthropic key (costs tokens)
 python tests/ruleaza.py          # same scenarios against the live backend (production key — end-to-end only)
 ```
 
-Run the two offline ones after any change to `citari.py` or to the CADRUL JURIDIC section of the prompt;
-they cost nothing. See `tests/README.md` before interpreting `local.py` results — model output is
+Run the three offline ones after any change to `citari.py`, `scor.py`, the CADRUL JURIDIC section or
+the response-format rules of the prompt; they cost nothing. See `tests/README.md` before interpreting `local.py` results — model output is
 non-deterministic and one observation is not a finding.
 
 ## Architecture
@@ -92,19 +93,28 @@ Single-file FastAPI app. Key things to know before editing it:
   reason printed with the correction.
   This is why guard instructions belong in code rather than in the prompt: a whitelist is a guarantee,
   a prompt line is a request honored probabilistically, and every new guard grows the prompt forever.
+- **`scor.py` — reads the `SCOR:` label out of the response; counts, never repairs.** `extrage_scor()`
+  returns one of `ETICHETE` (the same four labels as `SCORURI` in `App.jsx` — keep them in sync) or
+  `None`, tolerating the markdown the model wraps the line in (`**SCOR:** CRITIC`, `## SCOR: ...`). A
+  missing line means the frontend banner stays uncoloured, which is sometimes correct: the prompt allows
+  leaving the format when the message describes no financial risk at all (scenario 09). So it is a rate
+  to watch, not an error to fix — a jump after a prompt edit means the format-exit rule got too wide.
+  That is exactly the scenario-08 defect, which survived three full test runs (4, 17 and 19 August)
+  because nothing counted it.
 - Every successful `/analyze` call also inserts a row into a `verificari` SQLite table purely as a
   usage counter (no content is stored — a timestamp, plus `corectari`, how many alineate the citation
-  check rewrote in that response). Counting failures are swallowed (`except Exception: pass`) so they
-  never break the actual API response. `init_db()` adds the `corectari` column to an existing table if
-  missing, so the Railway volume migrates itself on deploy.
+  check rewrote in that response, and `fara_scor`, 1 when the answer carried no `SCOR:` line). Counting
+  failures are swallowed (`except Exception: pass`) so they never break the actual API response.
+  `init_db()` adds any missing counter column to an existing table, so the Railway volume migrates
+  itself on deploy.
 - `DB_PATH` picks `/data/stats.db` if `/data` exists (Railway volume, persists across redeploys) or
   falls back to a local `stats.db` next to `main.py` (e.g. when testing on Windows).
-- `GET /` is a bare health check; `GET /stats` exposes `{"total": ..., "azi": ..., "corectari": ...,
-  "corectari_azi": ...}` from the same table. The last two are the visible signal that the model cited a
-  wrong alineat: the check rewrites it to the catalog form, which makes the divergence invisible in the
-  answer itself, so it has to be countable somewhere. A rising `corectari_azi` after a prompt edit means
-  the model started arguing a different alineat than the one it cites — read the `citari` WARNING lines
-  in the Railway logs before assuming the prompt edit was harmless.
+- `GET /` is a bare health check; `GET /stats` exposes `{"total", "azi", "corectari", "corectari_azi",
+  "fara_scor", "fara_scor_azi"}` from the same table. The last four count what the delivered answer no
+  longer shows. A rising `corectari_azi` means the model started arguing a different alineat than the one
+  it cites — the check rewrites it, so the answer looks fine. A rising `fara_scor_azi` means answers are
+  arriving without the risk banner. Both print a WARNING (`citari` / `scor` loggers) in the Railway logs
+  with the detail; read those before assuming a prompt edit was harmless.
 - CORS is wide open (`allow_origins=["*"]`) since the frontend is a separately hosted static SPA.
 - `check.py` is a standalone throwaway script (direct `anthropic` call with an older/simpler system
   prompt and a hardcoded test scenario) used for prompt experimentation — it is not imported by
@@ -115,10 +125,9 @@ Single-file FastAPI app. Key things to know before editing it:
 Single-component app, no router, no state management library:
 
 - Holds `text` (textarea input), `rezultat` (raw markdown string from the backend), `loading`, `eroare`.
-- `analizeaza()` POSTs `{ text }` to a **hardcoded production URL**
-  (`https://verificainainte-production.up.railway.app/analyze`) — not an env var. If working against a
-  local backend, this URL needs to be changed manually (or made configurable) rather than assuming
-  `npm run dev` talks to `localhost`.
+- `analizeaza()` POSTs `{ text }` to `API_URL`, which is `import.meta.env.VITE_API_URL` falling back to
+  the production Railway URL. Working against a local backend means setting `VITE_API_URL` in the Vite
+  env — `npm run dev` alone still talks to production.
 - `detecteazaScor()` derives the risk banner (color/emoji) by naively checking whether the response text
   *contains* one of the four Romanian score labels (`SCĂZUT`, `MEDIU`, `RIDICAT`, `CRITIC`) — it does not
   parse structured JSON. This means the banner logic is coupled to the backend's `SYSTEM_PROMPT` always

@@ -71,10 +71,15 @@ def articole(r):
 
 
 def main():
-    filtru = next((a for a in sys.argv[1:] if not a.startswith("--")), None)
+    argumente = sys.argv[1:]
     repeta = 1
-    if "--repeta" in sys.argv:
-        repeta = int(sys.argv[sys.argv.index("--repeta") + 1])
+    if "--repeta" in argumente:
+        i = argumente.index("--repeta")
+        repeta = int(argumente[i + 1])
+        # valoarea lui --repeta nu e și filtru de scenariu („--repeta 2" ->
+        # filtru „2" -> niciun scenariu găsit)
+        del argumente[i:i + 2]
+    filtru = next((a for a in argumente if not a.startswith("--")), None)
 
     prompt = citeste_prompt()
     print(f"prompt: {len(prompt)} car. (~{round(len(prompt)/2.7)} tokeni) | model: {MODEL}\n")

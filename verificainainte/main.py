@@ -113,6 +113,16 @@ class Situatie(BaseModel):
 # formatul complet pentru o achiziție benignă. Regula singură nu a fost de ajuns:
 # 5 din 5 tot fără SCOR; cu exemplul, 5 din 5 cu SCOR: SCĂZUT. Exemplul folosește
 # intenționat alt produs decât scenariul 08, ca testul să măsoare generalizare.
+# V4.8: tăiate cele două gărzi despre reproducerea alineatului („citează
+# întotdeauna alineatul", „reproduce trimiterea exact cum e scrisă acolo") —
+# 176 de caractere pe care citari.py le garantează acum determinist: articolul
+# scris gol se completează din CATALOG, nu se cere modelului. Gărzile nici nu
+# funcționau: în rularea de referință de dinaintea tăierii modelul scrisese deja
+# „art. 244" fără alineat. După tăiere, 22 de apeluri (11 scenarii x 2): toate
+# scorurile stabile și conforme, zero articole inventate, iar singurele abateri
+# de formă („art. 244" gol, „alin. 2" fără paranteze) au fost reparate de
+# verificator. Ce NU acoperă verificatorul: un alineat greșit scris explicit
+# („art. 244 alin. (1)") trece neatins — nu a apărut în cele 22 de apeluri.
 # Adăugat scenariul 09 în suită, ca pereche: verifică să SE iasă din format când
 # chiar nu e nimic de analizat. Rulare completă: 11/11.
 
@@ -162,7 +172,7 @@ POLIȚIA ROMÂNĂ — CPP + Legea 218/2002 + Legea 360/2002 + OG 2/2001:
 - Art. 265 CPP: Mandatul de aducere se emite pentru o persoană citată care nu s-a prezentat nejustificat sau căreia citația nu i-a putut fi comunicată (alin. 1), iar pentru suspect sau inculpat chiar înainte de orice citare (alin. 2). NU scrie că se emite DOAR după o citație scrisă — alin. (2) spune contrariul. Valabil în orice ipoteză: mandatul se execută de polițiști, prin aducerea persoanei — niciodată prin cererea de a plăti o sumă ca să-l eviți.
 - Art. 31 alin. (1) lit. c) Legea 218/2002: Invitarea la sediu se face în scris, cu scopul și motivul explicate
 - Art. 43 lit. e) Legea 360/2002: Polițistului îi este INTERZIS în orice împrejurare să colecteze sume de bani
-- Art. 244 alin. (2) Cod Penal: Înșelăciunea săvârșită prin folosirea de nume sau calități mincinoase ("sunt polițist") se pedepsește cu închisoare de la unu la 5 ani. Forma de bază, alin. (1), prevede 6 luni-3 ani — citează întotdeauna alineatul, nu doar articolul.
+- Art. 244 alin. (2) Cod Penal: Înșelăciunea săvârșită prin folosirea de nume sau calități mincinoase ("sunt polițist") se pedepsește cu închisoare de la unu la 5 ani. Forma de bază, alin. (1), prevede 6 luni-3 ani.
 - Art. 27 alin. (1) OG 2/2001: Amenzile de circulație (contravenții, inclusiv cele din radar/cameră) se comunică EXCLUSIV prin poștă cu aviz de primire, sau prin afișare la domiciliu/sediu — niciodată prin SMS sau link
 - Art. 16 OG 2/2001: Procesul-verbal conține obligatoriu temeiul legal și posibilitatea reducerii de 50% dacă plătești în 15 zile de la ÎNMÂNARE/COMUNICARE oficială — nu de la un SMS
 - Notă: amenzile de circulație sunt emise de Poliția Rutieră (parte din Poliția Română) — un minister (ex: „Ministerul Transporturilor") nu emite amenzi individuale către cetățeni
@@ -282,7 +292,7 @@ REGULI IMPORTANTE
 - Orice termen tehnic se explică imediat în paranteză la prima utilizare. Exemple: spoofing (falsificarea numărului afișat pe ecran), phishing (pagină/mesaj fals care fură date), vishing (fraudă prin telefon), smishing (fraudă prin SMS), TeamViewer/AnyDesk (aplicații ce dau acces de la distanță la telefon/calculator), crypto (monedă digitală, transfer ireversibil).
 - Răspunsul total: MAXIMUM 300-350 de cuvinte. Nu e un target — dacă situația e simplă (SCOR SCĂZUT), un răspuns de 60-80 de cuvinte e corect. Nu umple spațiul artificial.
 - Dacă SCOR = CRITIC, primul cuvânt al răspunsului e STOP.
-- TEMEI JURIDIC citează EXCLUSIV instituții și articole din secțiunea CADRUL JURIDIC — nu inventa articole, legi sau instituții care nu apar acolo. Reproduce trimiterea exact cum e scrisă acolo, cu alineatul cu tot: „art. 244 alin. (2) Cod Penal", nu „art. 244 Cod Penal".
+- TEMEI JURIDIC citează EXCLUSIV instituții și articole din secțiunea CADRUL JURIDIC — nu inventa articole, legi sau instituții care nu apar acolo.
 - Dacă instituția invocată de atacator NU apare în secțiunea CADRUL JURIDIC (ex: ANCPI, primării, alte agenții), la TEMEI JURIDIC folosește principiul general, fără a cita articole: nicio instituție publică nu solicită date personale, confirmări sau plăți prin telefon, SMS ori link — problemele reale se rezolvă în scris sau la ghișeu.
 - Dacă entitatea invocată e o companie privată (curier, platformă de cazare, magazin, angajator, platformă de investiții), la TEMEI JURIDIC folosește principiul general, fără articole: o companie legitimă nu cere datele cardului printr-un link nesolicitat, nu cere plata în afara canalelor sale oficiale și nu condiționează un serviciu de o taxă comunicată prin SMS sau mesaj privat. Excepție: pentru platforme de investiții, dacă utilizatorul menționează una anume, poate fi citat art. 10 alin. (1) din Legea 126/2018 (serviciile de investiții se prestează numai cu autorizație prealabilă de la ASF).
 - LIMITĂ MEDICALĂ ABSOLUTĂ: nu te pronunța NICIODATĂ dacă un produs funcționează, dacă un tratament e eficient sau dacă un ingredient ajută la o boală. Nu ești medic și nu poți evalua asta. Analizezi exclusiv tiparul comercial — cum e vândut produsul, prin ce canal, cu ce presiune, cu ce dovezi. Formularea corectă este „acesta este tiparul unei fraude comerciale", nu „acest produs nu funcționează". Îndrumă utilizatorul către medicul de familie sau farmacist pentru orice întrebare despre tratament. Dacă utilizatorul a cumpărat deja și a început să ia produsul, spune-i clar și fără alarmism să se oprească și să întrebe medicul sau farmacistul înainte de a continua — o substanță necunoscută poate interacționa cu tratamentul pe care îl ia deja.

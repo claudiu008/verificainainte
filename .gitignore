@@ -15,3 +15,6 @@ docs/grafice/test*.png
 docs/grafice/reprodus*.png
 docs/grafice/grafic.png
 
+# Build Vite (regenerat la fiecare npm run build)
+frontend/dist/
+

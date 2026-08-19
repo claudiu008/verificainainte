@@ -12,7 +12,18 @@ const SCORURI = {
   'CRITIC': { culoare: '#b71c1c', fundal: '#ffebee', emoji: '🔴' },
 }
 
+// Linia „SCOR: CRITIC", cu markdownul în care o poate împacheta modelul:
+// „**SCOR:** CRITIC", „SCOR: **CRITIC**", „## SCOR: ...". Backendul citește
+// aceeași linie, cu același tipar, în verificainainte/scor.py — dacă se schimbă
+// una, se schimbă amândouă.
+const LINIA_SCOR = /^\s*#*\s*\**\s*SCOR\s*\**\s*:\s*\**\s*([A-ZĂÂÎȘȚ]+)/m
+
 function detecteazaScor(text) {
+  const potrivire = text.match(LINIA_SCOR)
+  if (potrivire && potrivire[1] in SCORURI) return potrivire[1]
+  // Fără linia de scor, rămâne comportamentul vechi — prima etichetă găsită
+  // oriunde în text. E o ghicire: o etichetă scrisă cu majuscule în proză o
+  // poate păcăli, fiindcă ordinea cheilor decide, nu poziția în text.
   for (const scor of Object.keys(SCORURI)) {
     if (text.includes(scor)) return scor
   }

@@ -102,19 +102,22 @@ Single-file FastAPI app. Key things to know before editing it:
   That is exactly the scenario-08 defect, which survived three full test runs (4, 17 and 19 August)
   because nothing counted it.
 - Every successful `/analyze` call also inserts a row into a `verificari` SQLite table purely as a
-  usage counter (no content is stored — a timestamp, plus `corectari`, how many alineate the citation
-  check rewrote in that response, and `fara_scor`, 1 when the answer carried no `SCOR:` line). Counting
+  usage counter (no content is stored — a timestamp, plus three defect counts: `corectari`, how many
+  alineate the citation check rewrote; `eliminari`, how many references it stripped; and `fara_scor`,
+  1 when the answer carried no `SCOR:` line). Counting
   failures are swallowed (`except Exception: pass`) so they never break the actual API response.
   `init_db()` adds any missing counter column to an existing table, so the Railway volume migrates
   itself on deploy.
 - `DB_PATH` picks `/data/stats.db` if `/data` exists (Railway volume, persists across redeploys) or
   falls back to a local `stats.db` next to `main.py` (e.g. when testing on Windows).
-- `GET /` is a bare health check; `GET /stats` exposes `{"total", "azi", "corectari", "corectari_azi",
-  "fara_scor", "fara_scor_azi"}` from the same table. The last four count what the delivered answer no
-  longer shows. A rising `corectari_azi` means the model started arguing a different alineat than the one
-  it cites — the check rewrites it, so the answer looks fine. A rising `fara_scor_azi` means answers are
-  arriving without the risk banner. Both print a WARNING (`citari` / `scor` loggers) in the Railway logs
-  with the detail; read those before assuming a prompt edit was harmless.
+- `GET /` is a bare health check; `GET /stats` exposes `{"total", "azi"}` plus a pair of counters
+  (`<name>` and `<name>_azi`) for each of `corectari`, `eliminari`, `fara_scor`. They count what the
+  delivered answer no longer shows: a rising `corectari_azi` means the model started arguing a different
+  alineat than the one it cites (the check rewrites it, so the answer looks fine); `eliminari_azi` means
+  references are being stripped — either the model invented articles or `CATALOG` is missing one it
+  should allow; `fara_scor_azi` means answers are arriving without the risk banner. Each prints a WARNING
+  (`citari` / `scor` loggers) in the Railway logs with the detail; read those before assuming a prompt
+  edit was harmless.
 - CORS is wide open (`allow_origins=["*"]`) since the frontend is a separately hosted static SPA.
 - `check.py` is a standalone throwaway script (direct `anthropic` call with an older/simpler system
   prompt and a hardcoded test scenario) used for prompt experimentation — it is not imported by
@@ -128,11 +131,12 @@ Single-component app, no router, no state management library:
 - `analizeaza()` POSTs `{ text }` to `API_URL`, which is `import.meta.env.VITE_API_URL` falling back to
   the production Railway URL. Working against a local backend means setting `VITE_API_URL` in the Vite
   env — `npm run dev` alone still talks to production.
-- `detecteazaScor()` derives the risk banner (color/emoji) by naively checking whether the response text
-  *contains* one of the four Romanian score labels (`SCĂZUT`, `MEDIU`, `RIDICAT`, `CRITIC`) — it does not
-  parse structured JSON. This means the banner logic is coupled to the backend's `SYSTEM_PROMPT` always
-  emitting the literal line `SCOR: <label>`; changing those labels in the backend prompt requires
-  updating `SCORURI` in `App.jsx` too.
+- `detecteazaScor()` derives the risk banner (color/emoji) from the literal `SCOR: <label>` line, using
+  the same regex as `verificainainte/scor.py` (change one, change both) — it does not parse structured
+  JSON. Only if that line is absent does it fall back to the old behaviour, the first of the four labels
+  (`SCĂZUT`, `MEDIU`, `RIDICAT`, `CRITIC`) found anywhere in the text — a guess, since key order decides
+  rather than position. The banner is therefore coupled to the prompt emitting that line; changing the
+  labels in the backend prompt requires updating `SCORURI` in `App.jsx` and `ETICHETE` in `scor.py`.
 - The result body itself is rendered with `react-markdown` since the model returns markdown-ish text
   following the prompt's required section format (SCOR / TIPAR DETECTAT / CE FACI ACUM / CE NU FACI /
   TEMEI JURIDIC / VERIFICĂ OFICIAL LA).

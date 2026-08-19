@@ -55,6 +55,9 @@ def init_db():
     #   corectari — câte alineate a rescris verificatorul de citări. Un alineat
     #     greșit e singurul semn că modelul argumenta alt lucru decât temeiul pe
     #     care îl citează, iar rescrierea îl face să arate corect.
+    #   eliminari — câte trimiteri a șters verificatorul. Fie modelul a inventat
+    #     un articol, fie lipsește unul din CATALOG — al doilea caz șterge tăcut
+    #     temeiuri juridice bune din răspunsuri, deci merită văzut la fel de repede.
     #   fara_scor — răspunsul n-a conținut linia „SCOR:", deci bannerul de risc
     #     din frontend rămâne necolorat. Uneori e corect (mesaj în afara sferei),
     #     dar o creștere după o modificare de prompt înseamnă că regula de ieșire
@@ -62,7 +65,7 @@ def init_db():
     #     nedetectat prin trei rulări complete de teste.
     # Coloanele se adaugă la baza existentă de pe volumul Railway.
     coloane = [c[1] for c in conn.execute("PRAGMA table_info(verificari)")]
-    for coloana in ("corectari", "fara_scor"):
+    for coloana in ("corectari", "eliminari", "fara_scor"):
         if coloana not in coloane:
             conn.execute(f"ALTER TABLE verificari ADD COLUMN {coloana} INTEGER DEFAULT 0")
     conn.commit()
@@ -436,6 +439,7 @@ async def analyze(request: Request, situatie: Situatie):
         logging.getLogger("citari").exception("verificarea citărilor a eșuat")
 
     corectari = sum(1 for nota in jurnal if nota["actiune"] == "corectat")
+    eliminari = sum(1 for nota in jurnal if nota["actiune"] == "eliminat")
 
     # Formatul nu se repară aici: absența scorului e uneori corectă (promptul
     # permite ieșirea din format), deci se numără, nu se rescrie.
@@ -446,8 +450,9 @@ async def analyze(request: Request, situatie: Situatie):
 
     try:
         conn = sqlite3.connect(DB_PATH)
-        conn.execute("INSERT INTO verificari (corectari, fara_scor) VALUES (?, ?)",
-                     (corectari, int(fara_scor)))
+        conn.execute(
+            "INSERT INTO verificari (corectari, eliminari, fara_scor) VALUES (?, ?, ?)",
+            (corectari, eliminari, int(fara_scor)))
         conn.commit()
         conn.close()
     except Exception:
@@ -472,9 +477,10 @@ async def stats():
         return conn.execute(
             f"SELECT COALESCE(SUM({coloana}), 0) FROM verificari{unde}").fetchone()[0]
 
-    corectari, corectari_azi = suma("corectari"), suma("corectari", True)
-    fara_scor, fara_scor_azi = suma("fara_scor"), suma("fara_scor", True)
+    valori = {c: (suma(c), suma(c, True)) for c in ("corectari", "eliminari", "fara_scor")}
     conn.close()
-    return {"total": total, "azi": azi,
-            "corectari": corectari, "corectari_azi": corectari_azi,
-            "fara_scor": fara_scor, "fara_scor_azi": fara_scor_azi}
+    raspuns = {"total": total, "azi": azi}
+    for coloana, (tot, azi_) in valori.items():
+        raspuns[coloana] = tot
+        raspuns[f"{coloana}_azi"] = azi_
+    return raspuns

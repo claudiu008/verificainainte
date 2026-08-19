@@ -21,3 +21,8 @@ frontend/dist/
 # Rulări de test (cele 3 de referință din august rămân urmărite, vezi tests/README.md)
 tests/rezultate/
 
+# Legislație de referință (PDF-uri mari, sursă pentru verificarea citărilor) și
+# rapoartele de audit generate din ele — materiale de lucru, nu conținut publicat
+docs/law/
+audit-juridic.md
+

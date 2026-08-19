@@ -4,7 +4,7 @@ Continuare a `SEO-SPEC.md`. Aceleași decizii de arhitectură, același template
 13 secțiuni, același CSS. Nu se schimbă nimic din specificația inițială.
 
 Motivul extinderii: `SYSTEM_PROMPT` a ajuns la 19 tipare, iar paginile
-statice acoperă 15 dintre ele. Cele 7 tipare adăugate în V4 și V4.4 nu au pagină.
+statice acoperă 15 dintre ele. Dintre acestea, 4 tipare nu au încă pagină.
 
 ---
 
@@ -27,7 +27,7 @@ statice acoperă 15 dintre ele. Cele 7 tipare adăugate în V4 și V4.4 nu au pa
 
 ## Sarcini tehnice după generarea paginilor
 
-- adaugă cele 7 URL-uri în `frontend/public/sitemap.xml`
+- adaugă în `frontend/public/sitemap.xml` URL-ul paginii rămase de generat
 - adaugă cardurile în `frontend/public/fraude/index.html`
 - **linkuri reciproce**: fiecare pagină nouă trebuie să primească minimum 2
   linkuri interne de la alte pagini. Adaugă în secțiunea „Alte fraude active
@@ -42,12 +42,12 @@ După volumul estimat de căutări în română:
 
 | # | Slug | Stare |
 |---|------|-------|
-| 1 | `colet-blocat-curier` | conținut aprobat, de generat |
-| 2 | `cazare-falsa-vacanta` | de generat |
-| 3 | `fals-suport-tehnic` | de generat |
-| 4 | `job-fals-sarcini-platite` | de generat |
-| 5 | `investitii-deepfake` | de generat — vezi avertismentul de la secțiunea 5 |
-| 6 | `escrocherie-sentimentala` | de generat |
+| 1 | `colet-blocat-curier` | generat |
+| 2 | `cazare-falsa-vacanta` | generat |
+| 3 | `fals-suport-tehnic` | generat |
+| 4 | `job-fals-sarcini-platite` | generat |
+| 5 | `investitii-deepfake` | generat — vezi avertismentul de la secțiunea 5 |
+| 6 | `escrocherie-sentimentala` | generat |
 | 7 | `abonament-suspendat-plata-esuata` | de generat |
 
 ---

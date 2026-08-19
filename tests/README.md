@@ -12,18 +12,20 @@ Se numește **regresie**: ceva care funcționa se strică fără să fi atins ac
 Antidotul e un set fix de scenarii, rulate identic de fiecare dată. Contează mai
 puțin rezultatul absolut, mai mult **diferența față de rularea anterioară**.
 
-## Ce testează cele 8 scenarii
+## Ce testează cele 10 scenarii
 
-| ID | Ce verifică |
-|----|-------------|
-| 01 | tipar de la **începutul** listei — mai e văzut? |
-| 02 | tipar de la **mijlocul** listei — poziția cea mai vulnerabilă |
-| 03 | tiparul cel mai **nou** + limita medicală |
-| 04 | tipar V4.2, mecanism inversat |
-| 05 | **fals pozitiv** — mesaj legitim; CRITIC aici = model stricat |
-| 06 | **nuanță** — situație ambiguă; nu trebuie CRITIC |
-| 07 | **fallback juridic** — instituție din afara cadrului; fără articole inventate |
-| 08 | **limita medicală** izolată — nu se pronunță pe eficacitate |
+| ID | Ce verifică | Scor așteptat |
+|----|-------------|---------------|
+| 01 | tipar de la **începutul** listei — mai e văzut? | CRITIC |
+| 02 | tipar de la **mijlocul** listei — poziția cea mai vulnerabilă | CRITIC |
+| 03 | tipar medical, **etapa 1** (reclama) + limita medicală | RIDICAT |
+| 03b | tipar medical, **etapa 2** — apelul „medicului"; profilare, nu vânzare | CRITIC |
+| 04 | tipar V4.2, mecanism inversat | CRITIC |
+| 04b | **abonament suspendat** — rămâne ferm când o coincidență reală face mesajul plauzibil | RIDICAT |
+| 05 | **fals pozitiv** — mesaj legitim; CRITIC aici = model stricat | SCĂZUT |
+| 06 | **nuanță** — situație ambiguă; nu trebuie CRITIC | MEDIU sau SCĂZUT |
+| 07 | **fallback juridic** — instituție din afara cadrului; fără articole inventate | CRITIC sau RIDICAT |
+| 08 | **limita medicală** izolată — nu se pronunță pe eficacitate | SCĂZUT |
 
 Scenariul 05 e cel mai ușor de uitat și cel mai important. Un model care vede
 fraudă peste tot e la fel de inutil ca unul care nu vede niciuna — doar că eșecul
@@ -44,7 +46,7 @@ Citește `SYSTEM_PROMPT` direct din `main.py` și cheamă API-ul Anthropic cu ch
 de **dev**. Nu atinge producția: fără rate limit, fără înregistrări în contorul
 SQLite, fără consum pe cheia de producție.
 
-Necesită `ANTHROPIC_API_KEY_DEV` în `.env`.
+Necesită `ANTHROPIC_API_KEY_DEV` în `.env` (se acceptă și numele vechi, `dev`).
 
 ### `ruleaza.py` — doar pentru verificare end-to-end
 
@@ -76,11 +78,28 @@ ignori alertele.
 
 ## Rezultate de referință
 
-Rulare 2026-08-04, prompt V4.3 (~11.150 tokeni), Haiku 4.5:
+Rulare 2026-08-19, prompt ~12.360 tokeni (33.363 caractere), Haiku 4.5
+(`rezultate/local-2026-08-19-0722.json`):
 
-- 8/8 scenarii cu scorul așteptat
+- 8/10 scenarii cu scorul așteptat
 - fără regresie pe tiparele vechi (01, 02 corecte, cu sfatul specific potrivit)
-- fără fals pozitiv (05 → SCĂZUT), fără alarmism (06 → MEDIU)
+- fără fals pozitiv (05 → SCĂZUT), fără alarmism (06 → SCĂZUT)
 - fallback juridic funcțional (07 → zero articole inventate)
-- scenariul 03 rulat de 5 ori: SCOR stabil CRITIC 5/5, zero articole inventate 5/5
+- tiparul nou 04b → RIDICAT, cu TEMEI JURIDIC fără niciun articol, cum cere promptul
+- 9 din 10 răspunsuri au toate cele 5 secțiuni obligatorii de format
 - persistent la toate rulările: greșeli de gramatică românească (limită de model)
+
+### Cele două abateri cunoscute
+
+**03 variază între RIDICAT și CRITIC.** Istoric: RIDICAT de 7 ori, CRITIC de 2 ori
+(inclusiv în rularea de referință din 4 august). Nu e regresie, e nedeterminism —
+vezi regula de interpretare de mai sus. Merită totuși revizuit dacă așteptarea
+`RIDICAT` din `scenarii.json` mai e corectă: criteriul CRITIC (g) din prompt
+descrie literal acest scenariu, deci CRITIC e apărabil.
+
+**08 nu emite deloc formatul.** Scorul iese „—" în *fiecare* rulare completă din
+istoric (4 august, 17 august, 19 august): răspunsul e bun pe fond — refuză să se
+pronunțe pe eficacitate și trimite la medic sau farmacist — dar nu conține niciuna
+dintre cele 5 secțiuni, deci nici linia `SCOR:`. Consecința e în frontend:
+`detecteazaScor()` din `App.jsx` caută eticheta în text, deci pentru astfel de
+întrebări bannerul de risc nu se colorează. Se repară din `SYSTEM_PROMPT`, nu din test.

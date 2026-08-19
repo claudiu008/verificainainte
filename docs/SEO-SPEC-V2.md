@@ -1,10 +1,10 @@
-# SEO-SPEC-V2.md — Extindere: 6 pagini noi de tipar
+# SEO-SPEC-V2.md — Extindere: 7 pagini noi de tipar
 
 Continuare a `SEO-SPEC.md`. Aceleași decizii de arhitectură, același template de
 13 secțiuni, același CSS. Nu se schimbă nimic din specificația inițială.
 
 Motivul extinderii: `SYSTEM_PROMPT` a ajuns la 14 tipare (V4.1), iar paginile
-statice acoperă doar primele 8. Cele 6 tipare adăugate în V4 nu au pagină.
+statice acoperă doar primele 8. Cele 7 tipare adăugate în V4 și V4.4 nu au pagină.
 
 ---
 
@@ -27,7 +27,7 @@ statice acoperă doar primele 8. Cele 6 tipare adăugate în V4 nu au pagină.
 
 ## Sarcini tehnice după generarea paginilor
 
-- adaugă cele 6 URL-uri în `frontend/public/sitemap.xml`
+- adaugă cele 7 URL-uri în `frontend/public/sitemap.xml`
 - adaugă cardurile în `frontend/public/fraude/index.html`
 - **linkuri reciproce**: fiecare pagină nouă trebuie să primească minimum 2
   linkuri interne de la alte pagini. Adaugă în secțiunea „Alte fraude active
@@ -48,6 +48,7 @@ După volumul estimat de căutări în română:
 | 4 | `job-fals-sarcini-platite` | de generat |
 | 5 | `investitii-deepfake` | de generat — vezi avertismentul de la secțiunea 5 |
 | 6 | `escrocherie-sentimentala` | de generat |
+| 7 | `abonament-suspendat-plata-esuata` | de generat |
 
 ---
 

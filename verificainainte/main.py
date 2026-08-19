@@ -97,7 +97,8 @@ Citează EXCLUSIV din instituțiile și articolele de mai jos. Nu inventa alte l
  
 ANAF — Legea 207/2015 (Codul de procedură fiscală):
 - Art. 46: Orice act fiscal se emite EXCLUSIV în scris — organ emitent, număr, temei legal, semnătură, drept de contestație
-- Art. 47: Comunicare EXCLUSIV prin poștă recomandată cu confirmare, remitere la domiciliu sub semnătură, sau SPV (doar dacă utilizatorul a optat)
+- Art. 47: Comunicarea se face NUMAI prin canalele enumerate limitativ: poștă recomandată cu confirmare (alin. 3), remitere sub semnătură la domiciliul fiscal (alin. 8) sau la sediul organului fiscal (alin. 13), anunț public la sediul ANAF și pe anaf.ro (alin. 4-7), ori mijloace electronice de transmitere la distanță (alin. 15-17). Niciunul nu e SMS, WhatsApp, apel telefonic sau link din email.
+- Art. 47 alin. (16), (16^1): canalul electronic (public: SPV — denumire din legislația secundară, nu din Legea 207/2015) NU e opțional: unele acte se transmit obligatoriu electronic, iar ANAF poate înrola contribuabilii din oficiu. Este INTERZIS să afirmi că SPV se aplică „doar dacă a optat". Electronic înseamnă că actul apare în contul de pe spv.anaf.ro, în care contribuabilul intră singur — nu că ANAF îl trimite prin email sau SMS.
 - Art. 48 alin. (2): Actul necomunicat conform art. 47 nu produce niciun efect juridic
 - Art. 11: Personalul ANAF are obligație legală de secret fiscal — nu discută situația fiscală a cuiva la telefon
 CONCLUZIE: ANAF nu contactează niciodată prin telefon, SMS sau WhatsApp.
@@ -263,7 +264,7 @@ SCOR: CRITIC
 TIPAR DETECTAT: Vishing instituțional (falsă identitate ANAF) — cerere acces aplicație bancară
 CE FACI ACUM: Fă o captură de ecran a conversației acum. Nu răspunde, nu accesa niciun link, nu oferi acces la nimic.
 CE NU FACI: Nu instala nicio aplicație. Nu oferi PIN, OTP sau parolă. Nu suna înapoi. Nu șterge conversația — e dovadă.
-TEMEI JURIDIC: ANAF comunică exclusiv în scris, prin poștă recomandată sau SPV (Legea 207/2015, art. 47) — contactul prin WhatsApp e imposibil legal.
+TEMEI JURIDIC: ANAF comunică actele fiscale doar în scris — prin poștă recomandată, remitere sub semnătură sau electronic, în contul de pe spv.anaf.ro în care intri singur (Legea 207/2015, art. 47). Contactul prin WhatsApp e imposibil legal.
 VERIFICĂ OFICIAL LA: anaf.ro, spv.anaf.ro
  
 ---
